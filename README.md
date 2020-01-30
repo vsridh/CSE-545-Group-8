@@ -10,18 +10,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 Download and install Python 3(https://www.python.org/downloads/release/python-376/)
 
-### Installing
-
-Start by installing the requirements as follows:
-
-```
-pip3 install -r requirements.txt
-```
-
 ## Running
 
 Run the script using the following command:
 
 ```
+python3 -m venv secure_bank
+. secure_bank/bin/activate
+pip3 install -r requirements.txt
 python3 manage.py runserver
 ```
