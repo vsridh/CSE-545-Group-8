@@ -1,1 +1,27 @@
-# CSE-545-Group-8
+# Secure Bank
+
+A Django application to simulate a secure banking application.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Download and install Python 3(https://www.python.org/downloads/release/python-376/)
+
+### Installing
+
+Start by installing the requirements as follows:
+
+```
+pip3 install -r requirements.txt
+```
+
+## Running
+
+Run the script using the following command:
+
+```
+python3 manage.py runserver
+```
