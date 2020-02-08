@@ -59,6 +59,7 @@ class Transaction(models.Model):
     transaction_value = models.BigIntegerField()
     transaction_date = models.DateTimeField()
     transaction_type = models.CharField(max_length=20)
+    transaction_status = models.CharField(max_length=20)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
