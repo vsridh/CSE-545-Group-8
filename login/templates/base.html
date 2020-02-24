@@ -11,7 +11,7 @@
       Hi {{ user.username }}!
       <p><a href="{% url 'logout' %}">logout</a></p>
     {% else %}
-      <a href="{% url 'login' %}">login</a>
+      <a href="{% url 'login:login_base' %}">login</a>
     {% endif %}
   </header>
   <hr>
@@ -20,8 +20,5 @@
     {% endblock %}
   </main>
   <hr>
-  <footer>
-    <a href="http://simpleisbetterthancomplex.com">simpleisbetterthancomplex.com</a>
-  </footer>
 </body>
 </html>
