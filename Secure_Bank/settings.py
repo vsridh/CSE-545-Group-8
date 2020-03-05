@@ -48,7 +48,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',    
+    'Secure_Bank.middleware.TimeOutLogin',
 ]
 
 ROOT_URLCONF = 'Secure_Bank.urls'
@@ -140,5 +141,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+# Stuff related to session management
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+AUTO_LOGOUT_DELAY_MINS = 1
