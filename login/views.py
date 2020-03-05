@@ -7,7 +7,7 @@ from datetime import datetime
 from .forms import LoginForm
 
 def login_user(request):
-    if reques.tmethod=='POST':
+    if request.method=='POST':
         form = LoginForm(request.POST)
 
         if form.is_valid():
