@@ -15,7 +15,7 @@ Download and install Python 3(https://www.python.org/downloads/release/python-37
 Start by installing the requirements as follows:
 
 ```
-pip3 install -r requirements.txt
+pip3 install virtualenv
 ```
 
 ## Running
@@ -23,5 +23,8 @@ pip3 install -r requirements.txt
 Run the script using the following command:
 
 ```
+python3 -m venv secure_bank
+. secure_bank/bin/activate
+pip3 install -r requirements.txt
 python3 manage.py runserver
 ```
