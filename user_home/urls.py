@@ -23,5 +23,6 @@ app_name = "user_home"
 
 urlpatterns = [
     path('', views.user_home, name='user_home'),
-    path('logout/',views.user_logout,name='logout')
+    path('logout/', views.user_logout, name='logout'),
+    path('accounts/', views.user_accounts, name='accounts'),
 ]

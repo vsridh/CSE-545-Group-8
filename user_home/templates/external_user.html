@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+                {{ title }}
+            {%  endblock %}
+        </title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-flow: column;
+            }
+
+            table, tbody, tr, td, a {
+                width: 100%;
+            }
+
+            tr {
+                height: 30px;
+            }
+
+            a {
+                border: black 1px solid;
+                color: black;
+                background-color: lightgray;
+                padding: 2px;
+            }
+
+            h1 {
+                margin-bottom: 0;
+                margin-top: 8px;
+            }
+
+            #leftPanel {
+                width: 10%;
+                border-right: black 1px solid;
+                height: 100%;
+            }
+
+            #header {
+                border-bottom: black 1px solid;
+                width: 100%;
+                height: 10%;
+            }
+
+            #content {
+                top: 10%;
+                left: 10%;
+                position: fixed;
+                width: 90%;
+                height: 90%;
+                overflow: auto;
+            }
+
+            #logout {
+                float: right;
+                width: fit-content;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <h1> Welcome {{ username }} </h1>
+            <a id="logout" href="/logout"> LOGOUT </a>
+        </div>
+        <div id="leftPanel">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/summary">Summary</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/accounts">Accounts</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/transfer">Transfer</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/help">Help</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
