@@ -22,6 +22,6 @@ from django.views.generic.base import TemplateView
 app_name = "user_home"
 
 urlpatterns = [
-    path('', views.user_home, name='user_home'),
+    path('home/', views.user_home, name='user_home'),
     path('logout/',views.user_logout,name='logout')
 ]

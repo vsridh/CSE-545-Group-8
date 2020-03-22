@@ -15,7 +15,7 @@ def login_user(request):
             if userObj is not None:
                 login(request,userObj)     
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-                return HttpResponseRedirect('/user_home/')
+                return HttpResponseRedirect('user_home/home/')
             else:
                 return HttpResponse("Login Failed!!")
             #if authorization is successful, redirect to appropriate page
