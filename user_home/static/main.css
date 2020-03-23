@@ -12,6 +12,13 @@ ul {
   margin: 0;
 }
 
+a{
+    color:#cbd5db;
+}
+a:hover{
+    color:#ffffff;
+}
+
 .bg-steel {
   background-color: #5f788a;
 }
@@ -50,5 +57,12 @@ ul {
 
 .menu:hover{
     background:#5f788a;
+    color:#ffffff;
+}
+
+a{
+    color:#818182;
+}
+a:hover{
     color:#ffffff;
 }

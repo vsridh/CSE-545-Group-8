@@ -23,5 +23,6 @@ app_name = "transactions"
 
 urlpatterns = [
     path('fundTransfer', views.fundTransfer, name='fund-transfer'),
-    path('pendingTransactions', views.pendingTrans, name='pending-transactions')
+    path('pendingTransactions', views.pendingTrans, name='pending-transactions'),
+    path('approveTransaction', views.approveTransaction, name='approve-transaction')
 ]

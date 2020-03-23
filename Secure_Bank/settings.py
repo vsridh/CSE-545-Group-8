@@ -144,4 +144,4 @@ STATIC_URL = '/static/'
 
 # Stuff related to session management
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-AUTO_LOGOUT_DELAY_MINS = 1
+AUTO_LOGOUT_DELAY_MINS = 5
