@@ -37,5 +37,5 @@ def pendingTrans(request):
     }
     return render(request, 'pendingTransactions.html', context)
 
-def approveTransaction(request):
+def updateTransaction(request):
     return HttpResponse({'value':'success'}, status=200)

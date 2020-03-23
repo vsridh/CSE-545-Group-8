@@ -11,10 +11,9 @@
      }
      $.ajax({
           type: 'POST',
-          url: './approveTransaction',
+          url: './updateTransaction',
           data: {'transactionId':transactionId, 'status':status,  csrfmiddlewaretoken: '{{ csrf_token }}'},
           success: function(data){
-            console.log('success')
             alert('Transaction ' + status +'. Transaction ID:' + transactionId);
           }});
 
