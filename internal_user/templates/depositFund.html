@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block javascript %}
+ <script>
+  </script>
+{% endblock %}
+{% block content %}
+<div class="form-group">
+    <form action='./depositFund' method="post">
+        {% csrf_token %}
+        <label>Customer name:</label>
+        <input type="text" class="form-control" name="customerName">
+        <label>Customer ID:</label>
+        <input type="number" class="form-control" name="customerId">
+        <label>Account ID:</label>
+        <input type="number" class="form-control" name="accountId">
+        <label>Account Type:</label>
+        <input type="text" class="form-control" name="accountType">
+        <label>Deposit amount:</label>
+        <input type="number" class="form-control" name="depositAmount">
+        <input type="submit" value="Deposit" class="btn btn-primary float-right app-submit">
+        <input type="submit" value="Request deposit" class="btn btn-primary float-right app-submit">
+    </form>
+</div>
+{% endblock content %}
