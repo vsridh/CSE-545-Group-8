@@ -1,0 +1,449 @@
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/sessions/backends/base.py", line 199, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 396, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/Secure_Bank/middleware.py", line 28, in __call__
+    resp = self.process_request(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/Secure_Bank/middleware.py", line 9, in process_request
+    if request.user.is_authenticated:
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/utils/functional.py", line 224, in inner
+    self._setup()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/utils/functional.py", line 360, in _setup
+    self._wrapped = self._setupfunc()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/auth/middleware.py", line 24, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/auth/middleware.py", line 12, in get_user
+    request._cached_user = auth.get_user(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/auth/__init__.py", line 173, in get_user
+    user_id = _get_user_session_key(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/auth/__init__.py", line 58, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/sessions/backends/base.py", line 64, in __getitem__
+    return self._session[key]
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/sessions/backends/base.py", line 204, in _get_session
+    self._session_cache = self.load()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/sessions/backends/db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/contrib/sessions/backends/db.py", line 34, in _get_session_from_db
+    expire_date__gt=timezone.now()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/query.py", line 411, in get
+    num = len(clone)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/query.py", line 258, in __len__
+    self._fetch_all()
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/models/sql/compiler.py", line 1144, in execute_sql
+    cursor.execute(sql, params)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/db/backends/sqlite3/base.py", line 396, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_session
+"GET / HTTP/1.1" 500 167566
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 14
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"GET /login/block/ HTTP/1.1" 200 13
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 41
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 41
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 41
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 41
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 25, in login_user
+    return HttpResponse("Login Failed!! Wrong username or password"+time_try)
+TypeError: can only concatenate str (not "int") to str
+"POST /login/ HTTP/1.1" 500 66205
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+Watching for file changes with StatReloader
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 38
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 38
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 39
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 13
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 36
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 61, in login_user
+    return login_block(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 71, in login_block
+    return HttpResponse("Login block!!not time need wait for"+str(end_time - start_time)+"second!")
+NameError: name 'end_time' is not defined
+"POST /login/ HTTP/1.1" 500 69287
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 33, in login_user
+    return login_block(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 71, in login_block
+    return HttpResponse("Login block!!not time need wait for"+str(end_time - start_time)+"second!")
+NameError: name 'end_time' is not defined
+"POST /login/ HTTP/1.1" 500 69639
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 61, in login_user
+    return login_block(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 71, in login_block
+    return HttpResponse("Login block!!not time need wait for"+str(end_time - start_time)+"second!")
+NameError: name 'end_time' is not defined
+"POST /login/ HTTP/1.1" 500 69288
+"GET /login/ HTTP/1.1" 200 585
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 61, in login_user
+    return login_block(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 71, in login_block
+    return HttpResponse("Login block!!not time need wait for"+str(end_time - start_time)+"second!")
+NameError: name 'end_time' is not defined
+"POST /login/ HTTP/1.1" 500 71046
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/anaconda3/envs/CSE-545-Group-8-development/lib/python3.7/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 59, in login_user
+    return login_block(request)
+  File "/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py", line 71, in login_block
+    return HttpResponse("Login block!!not time need wait for"+str(end_time - start_time)+"second!")
+NameError: name 'end_time' is not defined
+"POST /login/ HTTP/1.1" 500 69466
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 22
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 302 0
+"GET /user_home/ HTTP/1.1" 200 185
+"GET /user_home/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 23
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 22
+"GET /login/ HTTP/1.1" 200 585
+"POST /login/ HTTP/1.1" 200 42
+"GET /login/ HTTP/1.1" 200 585
+/Users/zhangziming/Documents/CSE-545-Group-8-development/login/views.py changed, reloading.
+Watching for file changes with StatReloader
