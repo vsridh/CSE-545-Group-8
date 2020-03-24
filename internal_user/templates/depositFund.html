@@ -22,7 +22,11 @@
   </script>
 {% endblock %}
 {% block content %}
-<div class="form-group">
+<div>
+    <div>
+        <h2>Initiate fund deposit</h2><br><br>
+    </div>
+    <div class="form-group">
     <form action='./depositFund' method="post">
         {% csrf_token %}
         {{form|crispy}}
@@ -30,5 +34,6 @@
         <input type="submit" id="deposit" value="Deposit" disabled >
         <input type="submit" id="request_deposit" value="Request deposit" disabled>
     </form>
+</div>
 </div>
 {% endblock content %}

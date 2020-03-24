@@ -25,5 +25,10 @@ urlpatterns = [
     path('initFundDeposit', views.initFundDeposit, name='init-fund-deposit'),
     path('searchCustomer', views.searchCustomer, name='search-customer'),
     path('depositFund', views.depositFund, name='deposit-fund'),
-    path('depositTemplate', views.depositTemplate, name='deposit-template')
+    path('depositTemplate', views.depositTemplate, name='deposit-template'),
+    path('initIssueCheque', views.initIssueCheque, name='init-issue-cheque'),
+    path('issueChequeTemplate', views.issueChequeTemplate, name='init-issue-cheque'),
+    path('issueCheque', views.issueCheque, name='issue-cheque'),
+    path('initViewCustomer', views.initViewCustomer, name='init-view-customer'),
+    path('viewCustomer', views.viewCustomer, name='view-customer')
 ]

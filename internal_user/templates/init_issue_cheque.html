@@ -5,14 +5,14 @@
 
 <div>
     <div>
-        <h2>Initiate fund deposit</h2><br><br>
+        <h2>Issue cashier cheque</h2><br><br>
     </div>
     <div class="form-group">
         <form action='./searchCustomer' method="post">
             <label>Search Customer:</label>
             {% csrf_token %}
             <input type="text" id="customerSearchString" class="form-control" name="customerSearchString" value={{customerSearchString}}><br>
-            <input type="hidden" name="context_page" value="deposit">
+            <input type="hidden" name="context_page" value="issue_cheque">
             <input type="submit" value="Search" class="btn btn-primary float-right app-submit"><br><br>
         </form>
     </div>
@@ -34,7 +34,7 @@
                     <td name="accountId">${{customer.accountId}}</td>
                     <td name="accountType">{{customer.accountType}}</td>
                     <td>
-                        <form method="POST" action="./depositTemplate">
+                        <form method="POST" action="./issueChequeTemplate">
                             {% csrf_token %}
                             <input type="hidden" name="customerName" value="{{customer.customerName}}">
                             <input type="hidden" name="customerId" value="{{customer.customerId}}">
@@ -44,6 +44,7 @@
                         </form>
                     </td>
                 </tr>
+
             {% endfor %}
         </table>
     </div>
