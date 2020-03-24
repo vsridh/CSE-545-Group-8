@@ -24,5 +24,6 @@ app_name = "internal_user"
 urlpatterns = [
     path('initFundDeposit', views.initFundDeposit, name='init-fund-deposit'),
     path('searchCustomer', views.searchCustomer, name='search-customer'),
-    path('depositFund', views.depositFund, name='deposit-fund')
+    path('depositFund', views.depositFund, name='deposit-fund'),
+    path('depositTemplate', views.depositTemplate, name='deposit-template')
 ]

@@ -1,24 +1,34 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags%}
 {% block javascript %}
  <script>
+    $(function(){
+         $('#id_depositAmount').keyup(function(e){
+            var amount = $("#id_depositAmount")[0].value;
+            if(amount == ""){
+                $('#request_deposit').prop("disabled", true);
+                $('#deposit').prop("disabled", true);
+            }
+            else if(amount>500){
+                $('#request_deposit').prop("disabled", false);
+                $('#deposit').prop("disabled", true);
+            }
+            else{
+                $('#request_deposit').prop("disabled", true);
+                $('#deposit').prop("disabled", false);
+            }
+        });
+    });
   </script>
 {% endblock %}
 {% block content %}
 <div class="form-group">
     <form action='./depositFund' method="post">
         {% csrf_token %}
-        <label>Customer name:</label>
-        <input type="text" class="form-control" name="customerName">
-        <label>Customer ID:</label>
-        <input type="number" class="form-control" name="customerId">
-        <label>Account ID:</label>
-        <input type="number" class="form-control" name="accountId">
-        <label>Account Type:</label>
-        <input type="text" class="form-control" name="accountType">
-        <label>Deposit amount:</label>
-        <input type="number" class="form-control" name="depositAmount">
-        <input type="submit" value="Deposit" class="btn btn-primary float-right app-submit">
-        <input type="submit" value="Request deposit" class="btn btn-primary float-right app-submit">
+        {{form|crispy}}
+
+        <input type="submit" id="deposit" value="Deposit" disabled >
+        <input type="submit" id="request_deposit" value="Request deposit" disabled>
     </form>
 </div>
 {% endblock content %}

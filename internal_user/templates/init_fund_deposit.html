@@ -1,18 +1,8 @@
 {% extends "base.html" %}
 {% block javascript %}
- <script>
-    function openDepositTemplate(customer){
-         $.ajax({
-              type: 'POST',
-              url: './depositFund',
-              data: {'customer':customer, csrfmiddlewaretoken: '{{ csrf_token }}'},
-              success: function(data){
-              }});
-    }
-
-  </script>
 {% endblock %}
 {% block content %}
+
 <div class="form-group">
     <div>
         <form action='./searchCustomer' method="post">
@@ -24,6 +14,8 @@
     </div>
 
     <div>
+        <form method="POST" action="./depositFund" id="depositTemplate">
+        </form>
         <table class="table table-hover">
             <thead class="thead-dark">
                <tr>
@@ -33,14 +25,29 @@
                   <th>Account Type</th>
               </tr>
             </thead>
-
           {% for customer in customers %}
-            <tr onclick="openDepositTemplate({{customer}})">
-                    <td>{{customer.customerName}}</td>
-                    <td>{{customer.customerId}}</td>
-                    <td>${{customer.accountId}}</td>
-                    <td>{{customer.accountType}}</td>
-            </tr>
+
+
+                    <tr>
+                        <form method="POST" action="./depositFund">
+                            <input type="hidden" name="customerName" value="{{customer.customerName}}">
+                        </form>
+                        <td name="customerName" form="depositTemplate">{{customer.customerName}}</td>
+                        <td name="customerId" form="depositTemplate">{{customer.customerId}}</td>
+                        <td name="accountId">${{customer.accountId}}</td>
+                        <td name="accountType">{{customer.accountType}}</td>
+                        <td>
+                            <form method="POST" action="./depositTemplate">
+                                {% csrf_token %}
+                                <input type="hidden" name="customerName" value="{{customer.customerName}}">
+                                <input type="hidden" name="customerId" value="{{customer.customerId}}">
+                                <input type="hidden" name="accountId" value="{{customer.accountId}}">
+                                <input type="hidden" name="accountType" value="{{customer.accountType}}">
+                                <input type="submit" value="Select" />
+                            </form>
+                        </td>
+                    </tr>
+
             {% endfor %}
         </table>
     </div>
