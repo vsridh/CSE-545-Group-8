@@ -40,7 +40,8 @@ def login_user(request):
                 #delete user in block list
                 if form.cleaned_data['user_id'] in block_list:
                     block_list.pop(form.cleaned_data['user_id'])
-
+                    if form.cleaned_data['user_id'] in block_wait_list:
+                        block_wait_list.pop(form.cleaned_data['user_id'])
                 #return user home page
                 return HttpResponseRedirect('/user_home/')
             else:
@@ -56,6 +57,7 @@ def login_user(request):
                     #add block time
                     start_time=time.time()
                     block_list[form.cleaned_data['user_id']]=start_time
+                    block_wait_list.pop(form.cleaned_data['user_id'])
                     return login_block(request)
 
                 return HttpResponse("Login Failed!! Wrong username or password"+str(try_times+1))
