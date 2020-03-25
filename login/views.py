@@ -40,8 +40,8 @@ def login_user(request):
                 #delete user in block list
                 if form.cleaned_data['user_id'] in block_list:
                     block_list.pop(form.cleaned_data['user_id'])
-                    if form.cleaned_data['user_id'] in block_wait_list:
-                        block_wait_list.pop(form.cleaned_data['user_id'])
+                if form.cleaned_data['user_id'] in block_wait_list:
+                    block_wait_list.pop(form.cleaned_data['user_id'])
                 #return user home page
                 return HttpResponseRedirect('/user_home/')
             else:
