@@ -37,21 +37,33 @@
         <div class="col-md-4">
           <div class="content-section">
               <ul class="list-group">
-                  <li class="list-group-item list-group-item-light menu" id="fundTransfer">Initiate fund deposit</li>
-                  <li class="list-group-item list-group-item-light menu">Issue cashier cheque</li>
-                  <li class="list-group-item list-group-item-light menu" onclick="/pendingTransactions">Transfer money</li>
-                  <li class="list-group-item list-group-item-light menu">View customer account</li>
-                  <li class="list-group-item list-group-item-light menu">Pending Transactions</li>
+                  <li class="list-group-item list-group-item-light menu" id="fundTransfer">
+                      <a href="http://localhost:8000/internal_user/initFundDeposit">Initiate fund deposit</a> </li>
+                  <li class="list-group-item list-group-item-light menu" id="issueCheque">
+                      <a href="http://localhost:8000/internal_user/initIssueCheque">Issue cashier cheque</a> </li>
+                  <li class="list-group-item list-group-item-light menu" id="transferFund">
+                      <a href="http://localhost:8000/transaction/initfundTransfer">Transfer money</a> </li>
+                  <li class="list-group-item list-group-item-light menu" id="viewCustomerAccount">
+                      <a href="http://localhost:8000/internal_user/initViewCustomer">View customer account</a> </li>
+                  <li class="list-group-item list-group-item-light menu" id="pendingTransactions">
+                      <a href="http://localhost:8000/transaction/pendingTransactions">Pending Transactions</a> </li>
               </ul>
           </div>
         </div>
           <div class="col-md-8">
-          {% block content %}{% endblock %}
-        </div>
+              {% if messages %}
+                {% for message in messages%}
+                    <div class="alert alert-{{message.tags}}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+              {% endif %}
+              {% block content %}{% endblock %}
+          </div>
       </div>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

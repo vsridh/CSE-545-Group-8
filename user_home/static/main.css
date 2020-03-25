@@ -5,11 +5,18 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #5f788a;
 }
 
 ul {
   margin: 0;
+}
+
+a{
+    color:#cbd5db;
+}
+a:hover{
+    color:#ffffff;
 }
 
 .bg-steel {
@@ -38,6 +45,7 @@ ul {
 
 .app-submit{
     background:#5f788a;
+    margin:10px;
 }
 
 .app-submit:hover{
@@ -50,5 +58,12 @@ ul {
 
 .menu:hover{
     background:#5f788a;
+    color:#ffffff;
+}
+
+a{
+    color:#818182;
+}
+a:hover{
     color:#ffffff;
 }

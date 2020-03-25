@@ -19,11 +19,16 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
 
-app_name = "transactions"
+app_name = "internal_user"
 
 urlpatterns = [
-    path('initfundTransfer', views.initfundTransfer, name='init-fund-transfer'),
-    path('fundTransfer', views.fundTransfer, name='fund-transfer'),
-    path('pendingTransactions', views.pendingTrans, name='pending-transactions'),
-    path('updateTransaction', views.updateTransaction, name='update-transaction')
+    path('initFundDeposit', views.initFundDeposit, name='init-fund-deposit'),
+    path('searchCustomer', views.searchCustomer, name='search-customer'),
+    path('depositFund', views.depositFund, name='deposit-fund'),
+    path('depositTemplate', views.depositTemplate, name='deposit-template'),
+    path('initIssueCheque', views.initIssueCheque, name='init-issue-cheque'),
+    path('issueChequeTemplate', views.issueChequeTemplate, name='init-issue-cheque'),
+    path('issueCheque', views.issueCheque, name='issue-cheque'),
+    path('initViewCustomer', views.initViewCustomer, name='init-view-customer'),
+    path('viewCustomer', views.viewCustomer, name='view-customer')
 ]
