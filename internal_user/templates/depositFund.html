@@ -6,15 +6,9 @@
          $('#id_depositAmount').keyup(function(e){
             var amount = $("#id_depositAmount")[0].value;
             if(amount == ""){
-                $('#request_deposit').prop("disabled", true);
-                $('#deposit').prop("disabled", true);
-            }
-            else if(amount>500){
-                $('#request_deposit').prop("disabled", false);
                 $('#deposit').prop("disabled", true);
             }
             else{
-                $('#request_deposit').prop("disabled", true);
                 $('#deposit').prop("disabled", false);
             }
         });
@@ -32,7 +26,6 @@
         {{form|crispy}}
 
         <input type="submit" id="deposit" value="Deposit" disabled >
-        <input type="submit" id="request_deposit" value="Request deposit" disabled>
     </form>
 </div>
 </div>

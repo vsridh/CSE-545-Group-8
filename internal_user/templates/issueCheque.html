@@ -7,14 +7,8 @@
             var amount = $("#id_chequeAmount")[0].value;
             if(amount == ""){
                 $('#issue_cheque').prop("disabled", true);
-                $('#request_cheque').prop("disabled", true);
-            }
-            else if(amount>500){
-                $('#request_cheque').prop("disabled", false);
-                $('#issue_cheque').prop("disabled", true);
             }
             else{
-                $('#request_cheque').prop("disabled", true);
                 $('#issue_cheque').prop("disabled", false);
             }
         });
@@ -32,7 +26,6 @@
             {{form|crispy}}
 
             <input type="submit" id="issue_cheque" value="Issue Cheque" disabled >
-            <input type="submit" id="request_cheque" value="Request cheque" disabled>
         </form>
     </div>
 </div>

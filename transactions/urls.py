@@ -22,6 +22,7 @@ from django.views.generic.base import TemplateView
 app_name = "transactions"
 
 urlpatterns = [
+    path('initfundTransfer', views.initfundTransfer, name='init-fund-transfer'),
     path('fundTransfer', views.fundTransfer, name='fund-transfer'),
     path('pendingTransactions', views.pendingTrans, name='pending-transactions'),
     path('updateTransaction', views.updateTransaction, name='update-transaction')

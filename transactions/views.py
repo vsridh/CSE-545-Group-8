@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
+from .forms import FundTransferForm
+from django.conf import settings
 
 transactionList = [
     {
@@ -29,6 +32,21 @@ transactionList = [
 ]
 
 def fundTransfer(request):
+    if request.method == 'POST':
+        print('inside')
+        form = FundTransferForm(request.POST)
+        if form.is_valid():
+            print('inside2')
+            transferAmount = form.cleaned_data.get('transferAmount')
+            messages.success(request, f'Fund transfered successfully {transferAmount}')
+            return redirect(settings.BASE_URL+'/user_home/home')
+        else:
+            messages.error(request, f'Form is not valid')
+            return redirect(settings.BASE_URL+'/user_home/home')
+    else:
+        return render(request, 'fundTransfer.html')
+
+def initfundTransfer(request):
     return render(request, 'fundTransfer.html')
 
 def pendingTrans(request):
