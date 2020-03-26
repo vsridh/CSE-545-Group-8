@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Modify customer account</h2><br><br>
+    </div>
+{% include "base_customer_search.html" with action_path="./modifyCustomerTemplate" button_value="Select" context_page="modify_customer" %}
+</div>
+{% endblock content %}

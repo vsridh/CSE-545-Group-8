@@ -24,7 +24,6 @@
     <form action='./depositFund' method="post">
         {% csrf_token %}
         {{form|crispy}}
-
         <input type="submit" id="deposit" value="Deposit" disabled >
     </form>
 </div>
