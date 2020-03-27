@@ -154,3 +154,9 @@ AUTO_LOGOUT_DELAY_MINS = 5
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 BASE_URL = 'http://localhost:8000'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'securebank100@gmail.com'
+EMAIL_HOST_PASSWORD = 'secure_bank@100'
+EMAIL_PORT = 587

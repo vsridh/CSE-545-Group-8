@@ -10,7 +10,7 @@ class ExtendedUserCreationForm(UserCreationForm):
 
     class Meta:
         model=User
-        fields=('username','email', 'first_name', 'last_name')
+        fields=('username','email', 'first_name', 'last_name',)
 
     def save(self):
         user = super().save(commit=False)
@@ -18,6 +18,7 @@ class ExtendedUserCreationForm(UserCreationForm):
         user.email=self.cleaned_data['email']
         user.first_name=self.cleaned_data['first_name']
         user.last_name=self.cleaned_data['last_name']
+        user.is_active=False
         user.save()
         return user
 
