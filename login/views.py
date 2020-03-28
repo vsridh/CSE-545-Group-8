@@ -36,7 +36,7 @@ def login_user(request):
             #login
             user_instance=User.objects.get(username=form.cleaned_data['user_id'])
             profile_instance=Profile.objects.get(user=user_instance)
-            if userObj is not None and profile_instance.flag==True:
+            if userObj is not None and profile_instance.flag==True and user_instance.is_active:
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 

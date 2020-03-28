@@ -33,10 +33,10 @@ def appointment(request):
             app=form.save(commit=False)
             app.user=request.user
             app.save()
-            username = request.user.username
-            password = request.user.password
-            app=authenticate(username=username, password=password)
-            return HttpResponseRedirect('/user_home/')
+            if request.user.is_authenticated and request.user.is_active:
+                return HttpResponseRedirect('/user_home/')
+            else:
+                return HttpResponse("Login Failed!! Wrong username or password")
     else:
         form=AppointmentForm()
     context={'form' : form}
@@ -49,11 +49,10 @@ def newAccount(request):
             a=acc_form.save(commit=False)
             a.user=request.user
             a.save()
-            username = request.user.username
-            password = request.user.password
-            ap=authenticate(username=username, password=password)
-            return HttpResponseRedirect('/user_home/')
-    else:
+            if request.user.is_authenticated and request.user.is_active:
+                return HttpResponseRedirect('/user_home/')
+            else:
+                return HttpResponse("Login Failed!! Wrong username or password")
         acc_form = AccountForm(request.POST)
     context={'acc_form' : acc_form}
     return render(request,'new_account/new_account.html',context)
@@ -65,10 +64,10 @@ def updateProfile(request):
             u=user_form.save(commit=False)
             u.user=request.user
             u.save()
-            username = request.user.username
-            password = request.user.password
-            app=authenticate(username=username, password=password)
-            return HttpResponseRedirect('/user_home/')
+            if request.user.is_authenticated and request.user.is_active:
+                return HttpResponseRedirect('/user_home/')
+            else:
+                return HttpResponse("Login Failed!! Wrong username or password")
     else:
         user_form = UserUpdateForm()
 
