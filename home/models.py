@@ -64,7 +64,7 @@ class Account(models.Model):
     )
     account_number=models.AutoField(primary_key=True)
     account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE)
-    account_balance = models.BigIntegerField(default=0)
+    account_balance = models.FloatField(default=0)
     creation_date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User,related_name="Account_User_id", on_delete=models.CASCADE)
     flag = models.BooleanField(default=False)
