@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% block javascript %}
  <script>
-    function approveTransaction(transactionId){
-        console.log(transactionId);
+    function updateTransaction(transactionId, status){
+    var ele = event.srcElement;
+    if(status=='approve'){
+        ele.nextElementSibling.disabled = true;
     }
-    function rejectTransaction(transactionId){
-        console.log(transactionId);
+    else{
+        ele.previousElementSibling.disabled = true;
+     }
+     $.ajax({
+          type: 'POST',
+          url: './updateTransaction',
+          data: {'transactionId':transactionId, 'status':status,  csrfmiddlewaretoken: '{{ csrf_token }}'},
+          success: function(data){
+            alert('Transaction ' + status +'. Transaction ID:' + transactionId);
+          }});
+
     }
+
   </script>
 {% endblock %}
 {% block content %}
@@ -28,13 +40,10 @@
                 <td>${{transaction.amount}}</td>
                 <td>{{transaction.transactionType}}</td>
                 <td>
-                    <input type="submit" value="Approve" onclick="approveTransaction({{transaction.transactionId}}')">
-                    <input type="submit" value="Reject" onclick="rejectTransaction({{transaction.transactionId}}')">
+                    <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateTransaction({{transaction.transactionId}}, 'approve')">
+                    <input type="submit" value="Reject" onclick="this.disabled=true;updateTransaction({{transaction.transactionId}}, 'reject')">
                 </td>
         </tr>
-
-
-
         {% endfor %}
     </table>
 {% endblock content %}

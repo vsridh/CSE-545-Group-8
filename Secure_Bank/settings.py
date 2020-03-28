@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'internal_user.apps.InternalUserConfig',
     'transactions.apps.TransactionsConfig',
     'user_home.apps.UserHomeConfig',
     'login.apps.LoginConfig',
@@ -144,4 +146,8 @@ STATIC_URL = '/static/'
 
 # Stuff related to session management
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-AUTO_LOGOUT_DELAY_MINS = 1
+AUTO_LOGOUT_DELAY_MINS = 5
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BASE_URL = 'http://localhost:8000'
