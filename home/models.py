@@ -68,6 +68,7 @@ class Account(models.Model):
     creation_date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User,related_name="Account_User_id", on_delete=models.CASCADE)
     flag = models.BooleanField(default=False)
+    delete = models.BooleanField(default=False)
 
     def __int__(self):
         return self.account_number

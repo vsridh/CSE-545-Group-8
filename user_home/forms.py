@@ -18,5 +18,8 @@ class AccountForm(forms.ModelForm):
         model = models.Account
         fields=('account_type',)
 
-
+class AccountDeleteForm(forms.Form):
+    account_number=forms.IntegerField()
+    class Meta:
+        fields=('account_number',)
         

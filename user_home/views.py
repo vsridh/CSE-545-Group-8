@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import AppointmentForm,UserUpdateForm,AccountForm
+from .forms import AppointmentForm,UserUpdateForm,AccountForm, AccountDeleteForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse
@@ -53,9 +53,27 @@ def newAccount(request):
                 return HttpResponseRedirect('/user_home/')
             else:
                 return HttpResponse("Login Failed!! Wrong username or password")
-        acc_form = AccountForm(request.POST)
+    else:
+        acc_form = AccountForm()
     context={'acc_form' : acc_form}
     return render(request,'new_account/new_account.html',context)
+
+def deleteAccount(request):
+    if request.method == 'POST':
+        acc_form = AccountDeleteForm(request.POST)
+        if acc_form.is_valid():
+            acc_number=acc_form.cleaned_data
+            account_instance = models.Account.objects.get(account_number=acc_number.get('account_number'))
+            account_instance.delete=True
+            account_instance.save()
+            if request.user.is_authenticated and request.user.is_active:
+                return HttpResponseRedirect('/user_home/')
+            else:
+                return HttpResponse("Login Failed!! Wrong username or password")
+    else:
+        acc_form = AccountDeleteForm()
+    context={'acc_form' : acc_form}
+    return render(request,'delete_account/delete_account.html',context)
 
 def updateProfile(request):
     if request.method == 'POST':

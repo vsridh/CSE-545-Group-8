@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Create New Account
+            Delete Account
         </title>
     </head>
     <body>
-        <form method="POST" action='/user_home/new_account/'>
+        <form method="POST" action='/user_home/delete_account/'>
             {% csrf_token %}
             {{ acc_form.as_p }}
-            <input type="submit" value="Add New Account">
+            <input type="submit" value="Delete Account">
         </form>
     </body>
 </html>
