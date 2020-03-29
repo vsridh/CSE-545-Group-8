@@ -31,10 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'create_account.apps.CreateAccountConfig',
+    'user_home.apps.UserHomeConfig',
+    'home.apps.HomeConfig',
     'crispy_forms',
     'internal_user.apps.InternalUserConfig',
     'transactions.apps.TransactionsConfig',
-    'user_home.apps.UserHomeConfig',
     'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',    
     'Secure_Bank.middleware.TimeOutLogin',
 ]
@@ -130,7 +133,7 @@ LOGGING = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'MST'
 
 USE_I18N = True
 
@@ -151,3 +154,9 @@ AUTO_LOGOUT_DELAY_MINS = 5
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 BASE_URL = 'http://localhost:8000'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'securebank100@gmail.com'
+EMAIL_HOST_PASSWORD = 'secure_bank@100'
+EMAIL_PORT = 587

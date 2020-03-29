@@ -22,6 +22,10 @@ from django.views.generic.base import TemplateView
 app_name = "user_home"
 
 urlpatterns = [
-    path('home/', views.user_home, name='user_home'),
-    path('logout/',views.user_logout,name='logout')
+    path('', views.user_home, name='user_home'),
+    path('logout/',views.user_logout,name='logout'),
+    path('appointment/',views.appointment,name='appointment'),
+    path('profile_update/',views.updateProfile, name='profile'),
+    path('new_account/',views.newAccount, name='new_account'),
+    path('delete_account/',views.deleteAccount, name='delete_account'),
 ]

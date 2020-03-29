@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from datetime import datetime
-
+from create_account import forms
+from home.models import User,Profile
+from .forms import LoginForm
 from .forms import LoginForm
 import time
 
@@ -22,7 +24,6 @@ def login_user(request):
 
         if form.is_valid():
             userObj = authenticate(username=form.cleaned_data['user_id'], password=form.cleaned_data['password'])
-
             #check block list
             if form.cleaned_data['user_id'] in block_list:
                 #check block time
@@ -33,7 +34,9 @@ def login_user(request):
                     return login_block(request)
 
             #login
-            if userObj is not None:
+            user_instance=User.objects.get(username=form.cleaned_data['user_id'])
+            profile_instance=Profile.objects.get(user=user_instance)
+            if userObj is not None and profile_instance.flag==True and user_instance.is_active:
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
