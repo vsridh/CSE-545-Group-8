@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 class TimeOutLogin:
     def process_request(self, request):
         if request.user.is_authenticated:
-            if request.session['last_activity']:
+            if 'last_activity' in request.session: 
                 last_activity = datetime.strptime(request.session['last_activity'], "%m/%d/%Y, %H:%M:%S")
                 try:
                     if datetime.now() - last_activity > timedelta(0, settings.AUTO_LOGOUT_DELAY_MINS * 60, 0):

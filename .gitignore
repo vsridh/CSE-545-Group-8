@@ -16,6 +16,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+bin/
 lib64/
 parts/
 sdist/
@@ -110,6 +111,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+pyenv.cfg
+.pyenv.cfg
 
 # Spyder project settings
 .spyderproject
@@ -141,3 +144,4 @@ group_project/
 
 
 
+debug.log
