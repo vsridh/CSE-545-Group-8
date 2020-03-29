@@ -16,7 +16,7 @@ from home import models
 # Create your views here.
 def user_home(request):      
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer":
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
 		# return HttpResponse('Session established')
         return render(request, 'user_homepage.html', {'username':request.user.username})
     else:
@@ -28,7 +28,7 @@ def user_logout(request):
 
 def appointment(request):
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer":
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         if request.method == 'POST':
             form = AppointmentForm(request.POST)
             if form.is_valid():
@@ -47,7 +47,7 @@ def appointment(request):
 
 def newAccount(request):
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer":
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         if request.method == 'POST':
             acc_form = AccountForm(request.POST)
             if acc_form.is_valid():
@@ -66,7 +66,7 @@ def newAccount(request):
 
 def deleteAccount(request):
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer":
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         if request.method == 'POST':
             acc_form = AccountDeleteForm(request.POST)
             if acc_form.is_valid():
@@ -86,7 +86,7 @@ def deleteAccount(request):
 
 def updateProfile(request):
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer":
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         if request.method == 'POST':
             user_form = UserUpdateForm(request.POST)
             if user_form.is_valid():
