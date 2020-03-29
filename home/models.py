@@ -33,8 +33,8 @@ class PendingProfileUpdate(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     zip_code = models.IntegerField()
-    mobile_number = models.CharField(max_length=10)
-    username = models.CharField(max_length=20)
+    mobile_number = models.CharField(max_length=10,unique=True)
+    username = models.CharField(max_length=20,unique=True)
 
     def __str__(self):
             return self.username
@@ -45,9 +45,9 @@ class Profile(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     zip_code = models.IntegerField()
-    mobile_number = models.CharField(max_length=10)
+    mobile_number = models.CharField(max_length=10,unique=True)
     birthdate = models.DateTimeField()
-    ssn = models.CharField(max_length=9)
+    ssn = models.CharField(max_length=9,unique=True)
     joining_date = models.DateTimeField(default=datetime.now)
     flag = models.BooleanField(default=False)
     privilege_id=models.ForeignKey(Privilege,related_name='ProfilePrivilege',on_delete=models.CASCADE,default='')

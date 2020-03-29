@@ -22,28 +22,36 @@
   </script>
 {% endblock %}
 {% block content %}
-    <table class="table">
-        <thead class="thead-dark">
-           <tr>
-              <th>Requester Name</th>
-              <th>Request Date</th>
-              <th>Amount</th>
-              <th>Transaction Type</th>
-              <th>Action</th>
-          </tr>
-        </thead>
+<div>
+    <div>
+        <h2>Pending Transactions</h2><br><br>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+               <tr>
+                  <th>Requester Name</th>
+                  <th>Request Date</th>
+                  <th>Amount</th>
+                  <th>Transaction Type</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
 
-      {% for transaction in pendingTransList %}
-        <tr>
-                <td>{{transaction.requesterName}}</td>
-                <td>{{transaction.requestDate}}</td>
-                <td>${{transaction.amount}}</td>
-                <td>{{transaction.transactionType}}</td>
-                <td>
-                    <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateTransaction({{transaction.transactionId}}, 'approve')">
-                    <input type="submit" value="Reject" onclick="this.disabled=true;updateTransaction({{transaction.transactionId}}, 'reject')">
-                </td>
-        </tr>
-        {% endfor %}
-    </table>
+          {% for transaction in pendingTransList %}
+            <tr>
+                    <td>{{transaction.requesterName}}</td>
+                    <td>{{transaction.requestDate}}</td>
+                    <td>${{transaction.amount}}</td>
+                    <td>{{transaction.transactionType}}</td>
+                    <td>
+                        <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateTransaction({{transaction.transactionId}}, 'approve')">
+                        <input type="submit" value="Reject" onclick="this.disabled=true;updateTransaction({{transaction.transactionId}}, 'reject')">
+                    </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
 {% endblock content %}

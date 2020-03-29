@@ -30,5 +30,10 @@ urlpatterns = [
     path('issueChequeTemplate', views.issueChequeTemplate, name='init-issue-cheque'),
     path('issueCheque', views.issueCheque, name='issue-cheque'),
     path('initViewCustomer', views.initViewCustomer, name='init-view-customer'),
-    path('viewCustomer', views.viewCustomer, name='view-customer')
+    path('viewCustomer', views.viewCustomer, name='view-customer'),
+    path('createCustomer', views.createCustomer, name='create-customer'),
+    path('initModifyCustomer', views.initModifyCustomer, name='init-modify-customer'),
+    path('modifyCustomerTemplate', views.modifyCustomerTemplate, name='modify-customer-template'),
+    path('modifyCustomer', views.modifyCustomer, name='modify-customer'),
+    path('deleteCustomer', views.deleteCustomer, name='delete-customer')
 ]

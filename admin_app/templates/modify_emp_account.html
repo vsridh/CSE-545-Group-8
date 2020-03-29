@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Modify employee account</h2><br><br>
+    </div>
+    <div>
+        <div class="form-group">
+            <form action='./searchEmployee' method="post">
+                <label>Search Employee:</label>
+                {% csrf_token %}
+                <input type="text" id="employeeSearchString" class="form-control" name="employeeSearchString" value={{employeeSearchString}}><br>
+                <input type="hidden" name="context_page" value="modify_employee">
+                <input type="submit" value="Search" class="btn btn-primary float-right app-submit"><br><br>
+            </form>
+        </div>
+    </div>
+    <div class="form-group">
+    <form action='./modifyEmployee' method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" id="modify_emp" value="Modify account">
+    </form>
+</div>
+</div>
+{% endblock content %}
