@@ -2,23 +2,23 @@ from django import forms
 from django.core.validators import MinValueValidator
 
 class FundDepositForm(forms.Form):
-    customerName = forms.CharField()
-    customerId = forms.IntegerField(validators=[MinValueValidator(1)])
-    accountId = forms.IntegerField(validators=[MinValueValidator(1)])
-    accountType = forms.CharField()
-    depositAmount = forms.FloatField(validators=[MinValueValidator(0.01)])
+    customerName = forms.CharField(label='Name')
+    customerId = forms.IntegerField(label='Customer Id', validators=[MinValueValidator(1)])
+    accountId = forms.IntegerField(label='Account Id', validators=[MinValueValidator(1)])
+    accountType = forms.CharField(label='Account type')
+    depositAmount = forms.FloatField(label='Deposit amount', validators=[MinValueValidator(0.01)])
 
 class IssueChequeForm(forms.Form):
-    customerName = forms.CharField()
-    accountId = forms.IntegerField(validators=[MinValueValidator(1)])
-    accountType = forms.CharField()
-    chequeAmount = forms.FloatField(validators=[MinValueValidator(0.01)])
-    recepientName = forms.CharField()
+    customerName = forms.CharField(label='Name')
+    accountId = forms.IntegerField(label='Account Id', validators=[MinValueValidator(1)])
+    accountType = forms.CharField(label='Account type')
+    chequeAmount = forms.FloatField(label='Cheque amount', validators=[MinValueValidator(0.01)])
+    recipientName = forms.CharField(label='Recipient name')
 
 class CustomerForm(forms.Form):
-    customerName = forms.CharField()
-    customerId = forms.IntegerField(validators=[MinValueValidator(1)])
-    accountId = forms.IntegerField(validators=[MinValueValidator(1)])
-    accountType = forms.CharField()
-    customerEmail = forms.EmailField()
-    customerPhoneNum = forms.IntegerField(validators=[MinValueValidator(1)])
+    customerName = forms.CharField(label='Name')
+    customerId = forms.IntegerField(label='Customer Id', validators=[MinValueValidator(1)])
+    accountId = forms.IntegerField(label='Account Id', validators=[MinValueValidator(1)])
+    accountType = forms.CharField(label='Account type')
+    customerEmail = forms.EmailField(label='Email')
+    customerPhoneNum = forms.IntegerField(label='Phone number', validators=[MinValueValidator(1)])

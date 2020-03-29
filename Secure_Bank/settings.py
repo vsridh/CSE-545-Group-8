@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    'admin_app.apps.AdminAppConfig',
     'create_account.apps.CreateAccountConfig',
     'user_home.apps.UserHomeConfig',
     'home.apps.HomeConfig',

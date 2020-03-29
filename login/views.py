@@ -46,7 +46,7 @@ def login_user(request):
                 if form.cleaned_data['user_id'] in block_wait_list:
                     block_wait_list.pop(form.cleaned_data['user_id'])
                 #return user home page
-                return HttpResponseRedirect('/user_home/')
+                return HttpResponseRedirect('/user_home/home')
             else:
                 #not in block list add
                 if form.cleaned_data['user_id'] in block_wait_list:
