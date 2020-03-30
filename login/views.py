@@ -52,6 +52,7 @@ def login_user(request):
                 if form.cleaned_data['user_id'] in block_wait_list:
                     block_wait_list.pop(form.cleaned_data['user_id'])
                 #return user home page
+
             elif userObj is None or profile_instance.flag==False or user_instance.is_active==False:
                 #not in block list add
                 if form.cleaned_data['user_id'] in block_wait_list:

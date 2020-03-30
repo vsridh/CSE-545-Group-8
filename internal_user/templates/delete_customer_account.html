@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Delete customer account</h2><br><br>
+    </div>
+{% include "base_customer_search.html" with action_path="./deleteCustomer" button_value="Delete customer" context_page="delete_customer" %}
+</div>
+{% endblock content %}

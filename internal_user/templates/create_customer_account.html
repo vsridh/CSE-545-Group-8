@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags%}
+
 {% block content %}
 <div>
     <div>
-        <h2>View customer</h2><br><br>
+        <h2>Create customer account</h2><br><br>
     </div>
     <div class="form-group">
-        <form class="read">
+        <form action='./createCustomer' method="post">
             {% csrf_token %}
-            {{form|crispy}}
+
+            <input type="submit" id="create_cust" value="Create new customer account">
         </form>
     </div>
 </div>
