@@ -62,7 +62,7 @@ class Account(models.Model):
     ('checking', 'CHECKING'),
     ('credit_card','CREDIT_CARD'),
     )
-    account_number=models.AutoField()
+    account_number=models.AutoField(primary_key=True)
     account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE)
     account_balance = models.FloatField(default=0)
     creation_date = models.DateTimeField(default=datetime.now)
