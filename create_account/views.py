@@ -18,6 +18,7 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_text
 
+
 def homepage(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
@@ -34,7 +35,6 @@ def homepage(request):
             profile.save()
             acc.save()
             current_site = get_current_site(request)
-            print(current_site)
             mail_subject = 'Activate your bank account.'
             message = render_to_string('acc_activate_email.html', {
                 'user': user,
