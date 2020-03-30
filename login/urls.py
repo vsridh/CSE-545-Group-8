@@ -23,5 +23,6 @@ app_name = "login"
 
 urlpatterns = [
     path('', views.login_user, name='login_base'),
-    path('block/', views.login_block, name='login_block')
+    path('block/', views.login_block, name='login_block'),
+    path('otp', views.verify_otp, name='verify_otp')
 ]
