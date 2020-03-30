@@ -47,8 +47,8 @@ def fund_deposit(request):
     if request.method == 'POST':
         form = FundDepositWithdrawForm(request.POST)
         if form.is_valid():
-            account = form.cleaned_data.get('account')
-            amount = form.cleaned_data.get('amount')
+            account = form.cleaned_data.get('depositAccount')
+            amount = form.cleaned_data.get('depositAmount')
             account_object = Account.objects.get(pk=account)
 
             # Check that account was found
@@ -58,6 +58,8 @@ def fund_deposit(request):
                 return render(request, 'success.html')
             else:
                 return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
+    elif request.method == 'GET':
+        return render(request, 'deposit.html')
     else:
         return render(request, 'failed.html', {'failure': '405 Error: Method not supported.'}, status=405)
 
@@ -67,8 +69,8 @@ def fund_withdraw(request):
     if request.method == 'POST':
         form = FundDepositWithdrawForm(request.POST)
         if form.is_valid():
-            account = form.cleaned_data.get('account')
-            amount = form.cleaned_data.get('amount')
+            account = form.cleaned_data.get('withdrawAccount')
+            amount = form.cleaned_data.get('withdrawAmount')
             account_object = Account.objects.get(pk=account)
 
             # Check that account was found
@@ -85,6 +87,8 @@ def fund_withdraw(request):
                 return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
         else:
             return render(request, 'failed.html', {'failure': '400 Error: Bad request.'}, status=400)
+    elif request.method == 'GET':
+        return render(request, 'withdraw.html')
     else:
         return render(request, 'failed.html', {'failure': '405 Error: Method not supported.'}, status=405)
 

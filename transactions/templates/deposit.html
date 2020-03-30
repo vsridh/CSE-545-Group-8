@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <div>
+        <h2>Deposit</h2><br><br>
+    </div>
+    <div id="depositForm" class="form-group">
+      <form action='/deposit' method="post" onsubmit="return validateDeposit()">
+                  {% csrf_token %}
+          <label for="depositAccount">To Account:</label>
+          <input type="number" id="depositAccount" class="form-control" name="depositAccount"><br><br>
+          <label for="depositAmount">Amount:</label>
+          <input type="number" id="depositAmount" step="0.01" class="form-control" name="depositAmount" min="0.01"><br><br>
+          <input type="submit" value="Submit" class="btn btn-primary float-right app-submit">
+      </form>
+    </div>
+</div>
+<script>
+    function validateDeposit() {
+        let accountNumber = document.getElementById("depositAccount").value;
+        let amount = document.getElementById("depositAmount").value;
+        
+        // Checks on account number
+
+        if (amount < 0.01) {
+            alert("Please enter an amount value of at least 0.01.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+{% endblock content %}
