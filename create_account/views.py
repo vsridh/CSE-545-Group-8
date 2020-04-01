@@ -55,8 +55,8 @@ def homepage(request):
             email = EmailMessage(
                         mail_subject, message, to=[to_email]
             )
-            email.send()
             mail_expiry=time.time()
+            email.send()
             return HttpResponseRedirect('/login/')
     else:
         form=ExtendedUserCreationForm()
@@ -73,24 +73,28 @@ def activate(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if mail_expiry-time.time()>86400:
+        user.delete()
         return HttpResponse('Activation link has expired!')
     if user is not None and account_activation_token.check_token(user, token):
         return HttpResponseRedirect('/create_account/phone_otp')
     else:
+        user.delete()
         return HttpResponse('Activation link is invalid!')
 
 def phone_otp(request):
     otp_expiry=time.time()
+    user_instance=User.objects.get(username=request.session['user'])
     if request.method == 'POST':
         form = Otp(request.POST)
         if form.is_valid():
             if time.time()-otp_expiry>300:
+                user_instance.delete()
                 return HttpResponse("Registration Failed!! OTP expired")
             if form.cleaned_data['otp'] == request.session['token']:
-                user_instance=User.objects.get(username=request.session['user'])
                 user_instance.is_active = True
                 user_instance.save()
                 return HttpResponseRedirect('/login')
+        user_instance.delete()
         return HttpResponse("Registration Failed!! Wrong OTP")
     else:
         form = Otp()

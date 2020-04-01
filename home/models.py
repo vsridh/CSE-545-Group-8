@@ -5,6 +5,10 @@ from django.dispatch import receiver
 from datetime import datetime
 from uuid import uuid4
 from random import randint
+from django.core.validators import RegexValidator
+
+alphanumeric = RegexValidator(r'^[a-zA-Z]*$', 'Only alphabetic characters are allowed.')
+charint = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
 
 
@@ -27,11 +31,11 @@ class Privilege(models.Model):
         return self.user_type
 
 class PendingProfileUpdate(models.Model):
-    first_name=models.CharField(max_length=20)
-    last_name=models.CharField(max_length=20)
+    first_name=models.CharField(max_length=20,validators=[alphanumeric])
+    last_name=models.CharField(max_length=20,validators=[alphanumeric])
     street_address = models.CharField(max_length=20)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)
+    city = models.CharField(max_length=20,validators=[alphanumeric])
+    state = models.CharField(max_length=20,validators=[alphanumeric])
     zip_code = models.IntegerField()
     user = models.ForeignKey(User,related_name="Pprofile_User_id", on_delete=models.CASCADE,default='')
 
@@ -41,12 +45,12 @@ class PendingProfileUpdate(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name="Profile_User", on_delete=models.CASCADE)
     street_address = models.CharField(max_length=20)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)
+    city = models.CharField(max_length=20,validators=[alphanumeric])
+    state = models.CharField(max_length=20,validators=[alphanumeric])
     zip_code = models.IntegerField()
-    mobile_number = models.CharField(max_length=10,unique=True)
+    mobile_number = models.IntegerField(max_length=10,unique=True)
     birthdate = models.DateTimeField()
-    ssn = models.CharField(max_length=9,unique=True)
+    ssn = models.IntegerField(max_length=9,unique=True)
     joining_date = models.DateTimeField(default=datetime.now)
     flag = models.BooleanField(default=False)
     privilege_id=models.ForeignKey(Privilege,related_name='ProfilePrivilege',on_delete=models.CASCADE,default='')
@@ -75,7 +79,7 @@ class Account(models.Model):
 class Transaction(models.Model):
     from_account = models.IntegerField()
     to_account = models.IntegerField()
-    transaction_value = models.BigIntegerField()
+    transaction_value = models.FloatField()
     transaction_date = models.DateTimeField()
     transaction_type = models.CharField(max_length=20)
     transaction_status = models.CharField(max_length=20)
