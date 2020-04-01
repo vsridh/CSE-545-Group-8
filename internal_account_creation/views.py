@@ -23,16 +23,13 @@ def internal_homepage(request):
         form = ExtendedUserCreationForm(request.POST)
         profile_form = UserProfileForm(request.POST)
         tier =TierStatus(request.POST)
-        print('-------------------------------------------------------------------')
-        print(tier)
-        print('-------------------------------------------------------------------')
         if form.is_valid() and profile_form.is_valid() and tier.is_valid():
             user= form.save()
             user.save()
             acc=tier.save(commit=False)
             profile=profile_form.save(commit=False)
             profile.user=user
-            profile.privilege_id=Privilege.objects.get(user_type="internal")
+            profile.privilege_id=Privilege.objects.get(user_type=acc)
             acc.user=profile.user
             profile.save()
             acc.save()

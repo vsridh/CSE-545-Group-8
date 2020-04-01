@@ -105,8 +105,10 @@ def verify_otp(request):
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
                 profile_instance = models.Profile.objects.get(user=request.user)
-                if profile_instance.privilege_id.user_type=="internal":
+                if profile_instance.privilege_id.user_type=="TIER1" or profile_instance.privilege_id.user_type == "TIER2":
                     return HttpResponseRedirect('http://127.0.0.1:8000/internal_user/createCustomer')
+                elif profile_instance.privilege_id.user_type == "TIER3":
+                    return HttpResponseRedirect('http://127.0.0.1:8000/admin_app/createEmployee')
                 else:
                     return HttpResponseRedirect('http://127.0.0.1:8000/user_home')
         return HttpResponse("Login Failed!! Wrong OTP")

@@ -118,4 +118,4 @@ class Tiers(models.Model):
     tier_status = models.CharField(max_length=20,choices=ASSIGNED_TYPE)
 
     def __str__(self):
-        return self.user.email
+        return self.tier_status
