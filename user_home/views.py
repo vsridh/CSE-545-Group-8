@@ -16,9 +16,15 @@ from home import models
 # Create your views here.
 def user_home(request):      
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
-		# return HttpResponse('Session established')
-        return render(request, 'user_homepage.html', {'username':request.user.username})
+    if request.user.is_authenticated and request.user.is_active and profile_instance.flag == 1:
+        if profile_instance.privilege_id.user_type == "Customer":
+            return render(request, 'customer_homepage.html', {'username':request.user.username})
+        elif profile_instance.privilege_id.user_type == "TIER1":
+            return render(request, 'tier1_homepage.html', {'username':request.user.username})
+        elif profile_instance.privilege_id.user_type == "TIER2":
+            return render(request, 'tier2_homepage.html', {'username': request.user.username})
+        elif profile_instance.privilege_id.user_type == "TIER3":
+            return render(request, 'tier3_homepage.html', {'username': request.user.username})
     else:
         return HttpResponse('Try again!')
 
