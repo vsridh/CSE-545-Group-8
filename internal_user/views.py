@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import FundDepositForm, IssueChequeForm, CustomerForm
 from django.conf import settings
+from home import models
 
 customers = [
     {
