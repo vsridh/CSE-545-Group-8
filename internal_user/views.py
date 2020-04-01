@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+
 from .forms import FundDepositForm, IssueChequeForm, CustomerForm
 from django.conf import settings
+from internal_user.approvals import _viewRequests, _updateRequest
+
 
 customers = [
     {
@@ -128,3 +131,10 @@ def deleteCustomer(request):
     else:
         form = CustomerForm()
         return render(request, 'delete_customer_account.html', context)
+
+def viewRequests(request):
+    return _viewRequests(request)
+
+def updateRequest(request):
+    print("updateRequest")
+    return _updateRequest(request)

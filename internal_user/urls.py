@@ -35,5 +35,8 @@ urlpatterns = [
     path('initModifyCustomer', views.initModifyCustomer, name='init-modify-customer'),
     path('modifyCustomerTemplate', views.modifyCustomerTemplate, name='modify-customer-template'),
     path('modifyCustomer', views.modifyCustomer, name='modify-customer'),
-    path('deleteCustomer', views.deleteCustomer, name='delete-customer')
+    path('deleteCustomer', views.deleteCustomer, name='delete-customer'),
+    path('viewRequests', views.viewRequests, name='view-requests'),
+    path('', views.viewRequests, name='view-requests'),
+    path('updateRequest', views.updateRequest, name='update-request')
 ]
