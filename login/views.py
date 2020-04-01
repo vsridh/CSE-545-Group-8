@@ -16,6 +16,7 @@ from django.core.mail import EmailMessage
 from django.utils.encoding import force_text
 from random import randint
 from django.urls import reverse
+from home import models
 
 
 #try wrong account list ------ username: number of try
@@ -103,7 +104,13 @@ def verify_otp(request):
                 userObj = authenticate(username=request.session['username'], password=request.session['password'])
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-                return HttpResponseRedirect('http://127.0.0.1:8000/user_home')
+                profile_instance = models.Profile.objects.get(user=request.user)
+                if profile_instance.privilege_id.user_type=="TIER1" or profile_instance.privilege_id.user_type == "TIER2":
+                    return HttpResponseRedirect('/internal_user/createCustomer')
+                elif profile_instance.privilege_id.user_type == "TIER3":
+                    return HttpResponseRedirect('/admin_app/createEmployee')
+                else:
+                    return HttpResponseRedirect('/user_home')
         return HttpResponse("Login Failed!! Wrong OTP")
     else:
         form = Otp()
