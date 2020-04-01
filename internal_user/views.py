@@ -136,5 +136,4 @@ def viewRequests(request):
     return _viewRequests(request)
 
 def updateRequest(request):
-    print("updateRequest")
     return _updateRequest(request)
