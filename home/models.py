@@ -111,9 +111,9 @@ class Requests(models.Model):
 
 class Tiers(models.Model):
     ASSIGNED_TYPE = (
-    ('TIER1','TIER1'),
-    ('TIER2', 'TIER2'),
-    ('TIER3','TIER3'),
+    ('Tier_1','Tier_1'),
+    ('Tier_2', 'Tier_2'),
+    ('Admin','Admin'),
     )
     tier_status = models.CharField(max_length=20,choices=ASSIGNED_TYPE)
 
