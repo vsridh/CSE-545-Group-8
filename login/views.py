@@ -16,6 +16,7 @@ from django.core.mail import EmailMessage
 from django.utils.encoding import force_text
 from random import randint
 from django.urls import reverse
+from django.conf import settings
 from home import models
 
 
@@ -92,7 +93,7 @@ def login_user(request):
     return render(request, 'login.html', {'form':form})
 
 def login_block(request):
-    return HttpResponse("Login block!!need wait for")
+    return HttpResponse("Login block!! Please wait for 10 mins")
 
 def verify_otp(request):
     if request.method == 'POST':
@@ -104,19 +105,19 @@ def verify_otp(request):
                 userObj = authenticate(username=request.session['username'], password=request.session['password'])
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-                profile_instance = models.Profile.objects.get(user=request.user)
-                if profile_instance.privilege_id.user_type=="TIER1" or profile_instance.privilege_id.user_type == "TIER2":
-                    return HttpResponseRedirect('/internal_user/createCustomer')
-                elif profile_instance.privilege_id.user_type == "TIER3":
+
+                profile_instance = request.user.Profile_User
+                if profile_instance.privilege_id.user_type==settings.SB_USER_TYPE_TIER_1 or profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
+                    return HttpResponseRedirect('/internal_user/')
+                elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
                     return HttpResponseRedirect('/admin_app/createEmployee')
                 else:
                     return HttpResponseRedirect('/user_home')
+
         return HttpResponse("Login Failed!! Wrong OTP")
     else:
         form = Otp()
     context={'form' : form}
     return render(request,'enter_otp.html',context)
-
-
 
 
