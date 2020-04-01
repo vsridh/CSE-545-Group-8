@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import FundDepositForm, IssueChequeForm, CustomerForm
 from django.conf import settings
 from internal_user.approvals import _viewRequests, _updateRequest
-
+from home import models
 
 customers = [
     {

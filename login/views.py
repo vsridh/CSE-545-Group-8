@@ -17,6 +17,7 @@ from django.utils.encoding import force_text
 from random import randint
 from django.urls import reverse
 from django.conf import settings
+from home import models
 
 
 #try wrong account list ------ username: number of try
@@ -105,11 +106,13 @@ def verify_otp(request):
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-                if request.user.Profile_User.privilege_id.user_type == settings.SB_USER_TYPE_CUSTOMER:
-                    return HttpResponseRedirect('http://127.0.0.1:8000/user_home')
-
-                if request.user.Profile_User.privilege_id.user_type == settings.SB_USER_TYPE_TIER_1 or request.user.Profile_User.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
-                    return HttpResponseRedirect('http://127.0.0.1:8000/internal_user/')
+                profile_instance = request.user.Profile_User
+                if profile_instance.privilege_id.user_type==settings.SB_USER_TYPE_TIER_1 or profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
+                    return HttpResponseRedirect('/internal_user/')
+                elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
+                    return HttpResponseRedirect('/admin_app/createEmployee')
+                else:
+                    return HttpResponseRedirect('/user_home')
 
         return HttpResponse("Login Failed!! Wrong OTP")
     else:
