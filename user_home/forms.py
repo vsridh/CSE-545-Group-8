@@ -11,7 +11,7 @@ class AppointmentForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = models.PendingProfileUpdate
-        fields=('first_name', 'last_name','street_address','city','state','zip_code','mobile_number',)
+        fields=('first_name', 'last_name','street_address','city','state','zip_code',)
 
 class AccountForm(forms.ModelForm):
     class Meta:

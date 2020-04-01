@@ -27,6 +27,7 @@ block_list={}
 def login_user(request):
     global block_wait_list
     global block_list
+    global otp_expiry
     try_times=0
     if request.method=='POST':
         form = LoginForm(request.POST)
@@ -82,6 +83,7 @@ def login_user(request):
                             mail_subject,message, to=[to_email]
                 )
                 email.send()
+                otp_expiry=time.time()
                 request.method='GET'
                 request.session['token'] = token
                 return verify_otp(request)
@@ -96,9 +98,9 @@ def login_block(request):
 def verify_otp(request):
     if request.method == 'POST':
         form = Otp(request.POST)
-        print(form.is_valid())
         if form.is_valid():
-            print(form.cleaned_data)
+            if time.time()-otp_expiry>300:
+                return HttpResponse("Login Failed!! OTP expired")
             if form.cleaned_data['otp'] == request.session['token']:
                 userObj = authenticate(username=request.session['username'], password=request.session['password'])
                 login(request,userObj)

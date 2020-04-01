@@ -33,11 +33,10 @@ class PendingProfileUpdate(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     zip_code = models.IntegerField()
-    mobile_number = models.CharField(max_length=10,unique=True)
-    username = models.CharField(max_length=20,unique=True)
+    user = models.ForeignKey(User,related_name="Pprofile_User_id", on_delete=models.CASCADE,default='')
 
     def __str__(self):
-            return self.username
+            return self.user.username
 
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name="Profile_User", on_delete=models.CASCADE)
