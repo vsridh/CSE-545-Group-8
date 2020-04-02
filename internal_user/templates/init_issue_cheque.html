@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block javascript %}
+{% endblock %}
+{% block content %}
+
+<div>
+    <div>
+        <h2>Issue cashier cheque</h2><br><br>
+    </div>
+{% include "base_customer_search.html" with action_path="./issueChequeTemplate" button_value="Select" context_page="issue_cheque"%}
+</div>
+{% endblock content %}
