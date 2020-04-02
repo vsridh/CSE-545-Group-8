@@ -11,19 +11,20 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
+from django.conf import settings
 from home import models
 
 # Create your views here.
 def user_home(request):      
     profile_instance = models.Profile.objects.get(user=request.user)
     if request.user.is_authenticated and request.user.is_active and profile_instance.flag == 1:
-        if profile_instance.privilege_id.user_type == "Customer":
+        if profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_CUSTOMER:
             return render(request, 'customer_homepage.html', {'username':request.user.username})
-        elif profile_instance.privilege_id.user_type == "TIER1":
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_1:
             return render(request, 'tier1_homepage.html', {'username':request.user.username})
-        elif profile_instance.privilege_id.user_type == "TIER2":
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
             return render(request, 'tier2_homepage.html', {'username': request.user.username})
-        elif profile_instance.privilege_id.user_type == "TIER3":
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
             return render(request, 'tier3_homepage.html', {'username': request.user.username})
     else:
         return HttpResponse('Try again!')
