@@ -21,8 +21,29 @@
         });
 
     }
-</script>
-{% endblock %} {% block content %}
+    function updateRequest(requestId, requestType, status){
+    var ele = event.srcElement;
+    if(status=='approve'){
+        ele.nextElementSibling.disabled = true;
+    }
+    else{
+        ele.previousElementSibling.disabled = true;
+     }
+     $.ajax({
+          type: 'POST',
+          url: './updateRequest',
+          data: {'requestId':requestId, 'requestType':requestType, 'status':status,  csrfmiddlewaretoken: '{{ csrf_token }}'},
+          success: function(data){
+            alert('Request ' + status +'. Request ID:' + requestId);
+          }});
+
+    }
+
+  </script>
+{% endblock %}
+{% block content %}
+
+{%if pendingTransList%}
 <div>
     <div>
         <h2>Pending Transactions</h2><br><br>
@@ -56,5 +77,47 @@
         </table>
     </div>
 </div>
+{%endif%}
 
-{% endblock %}
+{%if unapproved_profiles %}
+<div>
+    <div>
+        <h2>Pending User Registrations</h2><br><br>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+               <tr>
+                  <th>User name</th>
+                  <th>Name</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip Code</th>
+                  <th>Mobile Number</th>                  
+                  <th>Birth date</th>
+                  <th>Email Verified</th> 
+              </tr>
+            </thead>
+
+          {% for prof in unapproved_profiles %}
+            <tr>
+                    <td>{{prof.user.username}}</td>
+                    <td>{{prof.user.first_name}}</td>
+                    <td>{{prof.city}}</td>
+                    <td>{{prof.state}}</td>
+                    <td>{{prof.zip_code}}</td>
+                    <td>{{prof.mobile_number}}</td>
+                    <td>{{prof.birthdate}}</td>
+                    <td>{{prof.user.is_active}}</td>
+                    <td>
+                        <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateRequest('{{prof.user.username}}', 'user_registration', 'approve')">
+                        <input type="submit" value="Reject" onclick="this.disabled=true;updateRequest('{{prof.user.username}}', 'user_registration', 'reject')">
+                    </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{%endif%}
+
+{% endblock content %}

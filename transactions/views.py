@@ -20,7 +20,6 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from transactions.models import Pending_Transactions, Transaction
 from home.models import Account
 from transactions.forms import FundDepositWithdrawForm
-import io
 import mimetypes
 
 def fundTransfer(request):
@@ -158,6 +157,7 @@ def fund_withdraw(request):
     else:
         return render(request, 'failed.html', {'failure': '405 Error: Method not supported.'}, status=405)
 
+
 def initfundTransfer(request):
     return render(request, 'fundTransfer.html')
 
@@ -242,6 +242,7 @@ def generateStatements(request):
             return response
         else:
             return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
+    return HttpResponse({'value':'success'}, status=200)
 
 #generate key function
 #generate private key and public key
