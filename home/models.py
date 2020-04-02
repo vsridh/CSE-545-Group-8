@@ -111,3 +111,14 @@ class Requests(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Tiers(models.Model):
+    ASSIGNED_TYPE = (
+    ('TIER1','TIER1'),
+    ('TIER2', 'TIER2'),
+    ('TIER3','TIER3'),
+    )
+    tier_status = models.CharField(max_length=20,choices=ASSIGNED_TYPE)
+
+    def __str__(self):
+        return self.tier_status

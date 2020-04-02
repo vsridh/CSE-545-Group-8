@@ -7,6 +7,8 @@ __pycache__/
 # C extensions
 *.so
 
+virtualenvfolder/
+
 # Distribution / packaging
 .Python
 build/

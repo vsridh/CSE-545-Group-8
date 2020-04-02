@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+
 from .forms import FundDepositForm, IssueChequeForm, CustomerForm
 from django.conf import settings
-
+from internal_user.approvals import _viewRequests, _updateRequest
+from internal_user.utils import render_to_pdf,sign_file, verify_file
+from django.template.loader import get_template
+from django.views.generic import View
 customers = [
     {
         'customerName': 'James Karen',
@@ -51,6 +55,21 @@ def issueChequeTemplate(request):
     })
     return render(request, 'issueCheque.html', {'form':form})
 
+class GeneratePdf(View):
+    def get(self, request, *args, **kwargs):
+        cheque_id = 121
+        data = {
+            'pay_to': request.get('recipientName'),
+            'cheque_id': cheque_id,
+            'amount': request.get('chequeAmount'),
+        }
+        pdf = render_to_pdf('pdf_template.html', data)
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Cheque_" + str(cheque_id) + ".pdf"
+        content = "inline;filename=" + filename
+        response['Content-Disposition'] = content
+        return response
+
 def issueCheque(request):
     if request.method == 'POST':
         form = IssueChequeForm(request.POST)
@@ -58,7 +77,18 @@ def issueCheque(request):
             chequeAmount = form.cleaned_data.get('chequeAmount')
             ## backend code goes here
             messages.success(request, f'Cheque Issued successfully {chequeAmount}')
-            return redirect('./initIssueCheque')
+            cheque_id = 121
+            data = {
+                'pay_to':form.cleaned_data.get('recipientName'),
+                'cheque_id': cheque_id,
+                'amount': form.cleaned_data.get('chequeAmount'),
+            }
+            pdf = render_to_pdf('pdf_template.html', data)
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Cheque_" + str(cheque_id) +".pdf"
+            content = "inline;filename=" +filename
+            response['Content-Disposition'] =content
+            return response
 
 def searchCustomer(request):
     context = {
@@ -91,7 +121,7 @@ def viewCustomer(request):
         return render(request, 'view_customer.html', {'form':form})
 
 def createCustomer(request):
-    return render(request, 'create_customer_account.html')
+    return redirect(settings.BASE_URL+'/create_account')
 
 def initModifyCustomer(request):
     context = {'context_page' : 'modify_customer'}
@@ -128,3 +158,9 @@ def deleteCustomer(request):
     else:
         form = CustomerForm()
         return render(request, 'delete_customer_account.html', context)
+
+def viewRequests(request):
+    return _viewRequests(request)
+
+def updateRequest(request):
+    return _updateRequest(request)

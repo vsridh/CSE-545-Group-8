@@ -113,20 +113,39 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s',
+        },
+    },
     'handlers': {
-        'my_log_handler': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'django.log'),
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['my_log_handler'],
-            'level': 'INFO',
+        'django.request': {
+            # 'handlers': ['mail_admins'],
+            'handlers': ['console'],
+            'level': 'ERROR',
             'propagate': True,
         },
-    },
+    }
 }
 
 
@@ -151,6 +170,7 @@ STATIC_URL = '/static/'
 
 # Stuff related to session management
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 AUTO_LOGOUT_DELAY_MINS = 5
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -168,3 +188,8 @@ EMAIL_PORT = 587
 TWILIO_ACCOUNT_SID = 'ACc3f1f6c75f2f68352dbec156616a5461'
 TWILIO_AUTH_TOKEN = '857e30c7e138b2b9ceac44655d19fd9c'
 TWILIO_PHONE_NUMBER= '+12029522047'
+
+SB_USER_TYPE_TIER_1 = "Tier_1"
+SB_USER_TYPE_CUSTOMER = "Customer"
+SB_USER_TYPE_TIER_2 = "Tier_2"
+SB_USER_TYPE_TIER_3 = "Admin"

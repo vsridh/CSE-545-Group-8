@@ -20,6 +20,9 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
 import logging
 log = logging.getLogger(__name__)
+from django.conf import settings
+from home import models
+
 
 #try wrong account list ------ username: number of try
 block_wait_list={}
@@ -111,7 +114,13 @@ def verify_otp(request):
             if form.cleaned_data['otp'] == request.session['token']:
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-                return HttpResponseRedirect('/user_home')
+                profile_instance = request.user.Profile_User
+                if profile_instance.privilege_id.user_type==settings.SB_USER_TYPE_TIER_1 or profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
+                    return HttpResponseRedirect('/internal_user/')
+                elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
+                    return HttpResponseRedirect('/admin_app/createEmployee')
+                else:
+                    return HttpResponseRedirect('/user_home')
             else:
                 if request.session['username'] in block_list:
                     #check block time
@@ -142,7 +151,8 @@ def verify_otp(request):
                         block_list[request.session['username']]=start_time
                         block_wait_list.pop(request.session['username'])
                         return login_block(request)
-        return HttpResponse("Login Failed!!")
+
+        return HttpResponse("Login Failed!! Wrong OTP")
     else:
         form = Otp()
     context={'form' : form}
@@ -165,6 +175,4 @@ def forgot_password(request):
         context={'form' : form}
         return render(request,'forgot_password.html',context)
     return HttpResponse("Try again")
-
-
 
