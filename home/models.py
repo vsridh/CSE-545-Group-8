@@ -6,8 +6,6 @@ from datetime import datetime
 from uuid import uuid4
 from random import randint
 
-
-
 class Privilege(models.Model):
     view_transaction = models.BooleanField()
     create_transaction = models.BooleanField()

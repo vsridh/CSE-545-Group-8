@@ -130,7 +130,7 @@ def fund_withdraw(request):
                 if account_object.account_balance >= amount:
                     transaction_id = Transaction.objects.get(field_type='Counter')
                     pending = Pending_Transactions()
-                    pending.transaction_id = transaction_id
+                    pending.transaction_id = transaction_id.transaction_id
                     pending.from_account = account
                     pending.to_account = 'self'
                     pending.transaction_value = amount
@@ -149,8 +149,7 @@ def fund_withdraw(request):
         else:
             return render(request, 'failed.html', {'failure': '400 Error: Bad request.'}, status=400)
     elif request.method == 'GET':
-        user_id = Account.objects.get(username=request.user.username).id
-        accounts_list = Account.objects.filter(user=user_id)
+        accounts_list = Account.objects.filter(user=request.user)
         accounts = []
         for account in accounts_list:
             accounts.append({"number": account.account_number, "type": account.account_type})
@@ -200,48 +199,45 @@ def updateTransaction(request):
     return HttpResponse({'value':'success'}, status=200)
 
 def generateStatements(request):
-    if request.method == 'POST':
-        account_number = request.POST['account_number']
-        account_object = Account.objects.get(pk=account_number)
-        if account_object is not None:
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            row_height = pdf.font_size
-            spacing = 4
-            pdf.write(row_height, 'Account Number: {}\n'.format(account_number))
-            pdf.write(row_height, 'Account Type: {}\n'.format(account_object.account_type))
-            pdf.write(row_height, 'Account Balance: {}\n\n'.format(account_object.account_balance))
-            col_width = pdf.w / 4.5
-            records = [['Recipient', 'Amount', 'Date', 'Time']]
-            url = 'http://localhost:8080/api/query'
-            payload = '{"from": "' + str(account_number) + '"}'
-            headers = {'content-type': 'application/json',}
-            r = requests.get(url, data=payload, headers=headers)
-            json_data = json.loads(r.json()['response'])
-            row_data = []
-            for row in json_data:
-                row_data.append(row['Record']['from'])
-                row_data.append(row['Record']['amount'])
-                row_data.append(row['Record']['date'])
-                row_data.append(row['Record']['time'])
-                records.append(row_data)
-            for row in records:
-                for item in row:
-                    pdf.cell(col_width, row_height*spacing,
-                            txt=item, border=1)
-                pdf.ln(row_height*spacing)
-            filename = '{}-{}.pdf'.format(account_object().account_number, datetime.now())
-            pdf.output('/statements/' + filename)
-            # fill these variables with real values
-            fl_path = '/statements'
-            fl = open(fl_path, 'r')
-            mime_type, _ = mimetypes.guess_type(fl_path)
-            response = HttpResponse(fl, content_type=mime_type)
+    user = request.user
+    account_object = Account.objects.get(user=user)
+    if account_object is not None:
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        row_height = pdf.font_size
+        spacing = 4
+        pdf.write(row_height, 'Account Number: {}\n'.format(account_object.account_number))
+        pdf.write(row_height, 'Account Type: {}\n'.format(account_object.account_type))
+        pdf.write(row_height, 'Account Balance: {}\n\n'.format(account_object.account_balance))
+        col_width = pdf.w / 4.5
+        records = [['Recipient', 'Amount', 'Date', 'Time']]
+        url = 'http://localhost:8080/api/query'
+        payload = '{"from": "' + str(account_object.account_number) + '"}'
+        headers = {'content-type': 'application/json',}
+        r = requests.get(url, data=payload, headers=headers)
+        json_data = json.loads(r.json()['response'])
+        row_data = []
+        for row in json_data:
+            row_data.append(row['Record']['from'])
+            row_data.append(row['Record']['amount'])
+            row_data.append(row['Record']['date'])
+            row_data.append(row['Record']['time'])
+            records.append(row_data)
+        for row in records:
+            for item in row:
+                pdf.cell(col_width, row_height*spacing,
+                        txt=item, border=1)
+            pdf.ln(row_height*spacing)
+        filename = '{}-{}.pdf'.format(account_object.account_number, datetime.now())
+        pdf.output('./transactions/statements/' + filename)
+        # fill these variables with real values
+        with open('./transactions/statements/' + filename, 'rb') as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = "attachment; filename=%s" % filename
             return response
-        else:
-            return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
+    else:
+        return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
 
 #generate key function
 #generate private key and public key

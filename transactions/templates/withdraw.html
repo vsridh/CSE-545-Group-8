@@ -4,25 +4,25 @@
         <h2>Withdraw</h2><br><br>
     </div>
     <div id="withdrawForm" class="form-group">
-        <form action='/withdraw' method="post" onsubmit="return validateWithdraw()">
+        <form action='/transaction/withdraw' method="post" onsubmit="return validateWithdraw()">
             {% csrf_token %}
-            <label for="withdrawAccount">From Account:</label>
-            <select id="withdrawAccount" class="form-control" name="withdrawAccount">
-              {% for number, type in accounts %}
-                  <option value="{% number %}">{% type %}</option>
+            <label for="accountId">From Account:</label>
+            <select id="accountId" class="form-control" name="accountId">
+              {% for value in accounts %}
+                  <option value="{{ value.number }}">{{ value.type }} {{ value.number }}</option>
               {% endfor %}
           </select>
             <br><br>
-            <label for="withdrawAmount">Amount:</label>
-            <input type="number" id="withdrawAmount" step="0.01" class="form-control" name="withdrawAmount" min="0.01"><br><br>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" step="0.01" class="form-control" name="amount" min="0.01"><br><br>
             <input type="submit" value="Submit" class="btn btn-primary float-right app-submit">
         </form>
     </div>
 </div>
 <script>
     function validateWithdraw() {
-        let accountNumber = document.getElementById("withdrawAccount").value;
-        let amount = document.getElementById("withdrawAmount").value;
+        let accountNumber = document.getElementById("accountId").value;
+        let amount = document.getElementById("amount").value;
         let accounts = "{{accounts}}";
 
         // Checks on account number
