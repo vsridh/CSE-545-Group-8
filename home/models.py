@@ -34,10 +34,11 @@ class PendingProfileUpdate(models.Model):
     state = models.CharField(max_length=20)
     zip_code = models.IntegerField()
     mobile_number = models.CharField(max_length=10,unique=True)
-    username = models.CharField(max_length=20,unique=True)
+    flag = models.BooleanField(default=False)
+    user = models.ForeignKey(User,related_name='pending_user',on_delete=models.CASCADE,default='')
 
     def __str__(self):
-            return self.username
+            return self.user.username
 
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name="Profile_User", on_delete=models.CASCADE)
@@ -68,7 +69,7 @@ class Account(models.Model):
     creation_date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User,related_name="Account_User_id", on_delete=models.CASCADE)
     flag = models.BooleanField(default=False)
-    delete = models.BooleanField(default=False)
+    to_delete = models.BooleanField(default=False)
 
     def __int__(self):
         return self.account_number
