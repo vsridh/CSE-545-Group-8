@@ -18,7 +18,8 @@ from random import randint
 from django.urls import reverse
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
-
+import logging
+log = logging.getLogger(__name__)
 
 #try wrong account list ------ username: number of try
 block_wait_list={}

@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
 from home import models
+import logging
+log = logging.getLogger(__name__)
 
 # Create your views here.
 def user_home(request):      

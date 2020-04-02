@@ -21,7 +21,8 @@ from twilio.rest import Client
 from django.conf import settings
 from random import randint
 import time
-
+import logging
+log = logging.getLogger(__name__)
 
 def homepage(request):
     global mail_expiry
