@@ -57,3 +57,6 @@ def searchEmployee(request):
         return render(request, 'close_emp_account.html', {'form': form})
 
     return render(request, 'view_employee.html')
+
+def systemLog(request):
+    return render(request, 'system_log.html')

@@ -193,3 +193,6 @@ SB_USER_TYPE_TIER_1 = "Tier_1"
 SB_USER_TYPE_CUSTOMER = "Customer"
 SB_USER_TYPE_TIER_2 = "Tier_2"
 SB_USER_TYPE_TIER_3 = "Admin"
+
+SIGNATURE_FILES = 'internal_user/cheque_signature/signature_'
+SIGNATURE_FILES_FORMAT = '.pdf'
