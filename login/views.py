@@ -115,7 +115,6 @@ def verify_otp(request):
                 login(request,userObj)
                 request.session['last_activity'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
                 return HttpResponseRedirect('/user_home/')
-
             else:
                 if request.session['username'] in block_list:
                     #check block time
@@ -170,4 +169,3 @@ def forgot_password(request):
         context={'form' : form}
         return render(request,'forgot_password.html',context)
     return HttpResponse("Try again")
-
