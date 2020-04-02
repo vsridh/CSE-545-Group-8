@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
 from home import models
+import logging
+log = logging.getLogger(__name__)
 from transactions import views as v
 
 # Create your views here.
@@ -79,9 +81,11 @@ def deleteAccount(request):
             else:
                 return HttpResponse("invalid form")
         else:
-            acc_form = AccountDeleteForm()
-        context={'acc_form' : acc_form}
-        return render(request,'delete_account/delete_account.html',context)
+            accounts_list = models.Account.objects.filter(user=request.user)
+            accounts = []
+            for account in accounts_list:
+                accounts.append({"number": account.account_number, "type": account.account_type})
+            return render(request, 'delete_account/delete_account.html', {"accounts": accounts})
     else:
         return HttpResponse("Login Failed!! Wrong username or password")
 
