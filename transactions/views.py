@@ -236,14 +236,8 @@ def generateStatements(request):
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = "attachment; filename=%s" % filename
             return response
-<<<<<<< HEAD
     else:
         return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
-=======
-        else:
-            return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
-    return HttpResponse({'value':'success'}, status=200)
->>>>>>> 30bf619acab7a58bbf91fb66cbfddbf83bada48d
 
 #generate key function
 #generate private key and public key
