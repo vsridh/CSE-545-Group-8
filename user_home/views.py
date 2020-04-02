@@ -11,15 +11,22 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
-from home import models
 from transactions import views as v
+from django.conf import settings
+from home import models
 
 # Create your views here.
 def user_home(request):      
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
-		# return HttpResponse('Session established')
-        return render(request, 'user_homepage.html', {'username':request.user.username})
+    if request.user.is_authenticated and request.user.is_active and profile_instance.flag == 1:
+        if profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_CUSTOMER:
+            return render(request, 'customer_homepage.html', {'username':request.user.username})
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_1:
+            return render(request, 'tier1_homepage.html', {'username':request.user.username})
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
+            return render(request, 'tier2_homepage.html', {'username': request.user.username})
+        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
+            return render(request, 'tier3_homepage.html', {'username': request.user.username})
     else:
         return HttpResponse('Try again!')
 
@@ -104,11 +111,11 @@ def updateProfile(request):
     else:
             return HttpResponse("Login Failed!! Wrong username or password")
 
-
 def default_fund_deposit(request):
     profile_instance = models.Profile.objects.get(user=request.user)
     if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         return v.fund_deposit(request)
+<<<<<<< HEAD
 
 def default_fund_withdraw(request):
     profile_instance = models.Profile.objects.get(user=request.user)
@@ -119,3 +126,5 @@ def default_get_statements(request):
     profile_instance = models.Profile.objects.get(user=request.user)
     if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
         return v.generateStatements(request)
+=======
+>>>>>>> 30bf619acab7a58bbf91fb66cbfddbf83bada48d
