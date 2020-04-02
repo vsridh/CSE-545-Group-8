@@ -10,8 +10,10 @@
         </title>
     </head>
     <body>
-        <form method="POST" action='/login/otp'>
+        <form method="POST" action='phone_otp'>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Confirm OTP">
         </form>
+    </body>
+</html>
