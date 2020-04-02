@@ -1,0 +1,8 @@
+{% extends "customer_homepage.html" %}
+{% block content %}
+        <form method="POST" action='/user_home/new_account/'>
+            {% csrf_token %}
+            {{ acc_form.as_p }}
+            <input type="submit" value="Add New Account">
+        </form>
+{% endblock content %}

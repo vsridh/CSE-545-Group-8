@@ -1,0 +1,10 @@
+{% extends "customer_homepage.html" %}
+{% block content %}
+
+        <form method="POST" action='/user_home/appointment/'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Confirm New Appointment">
+        </form>
+
+{% endblock content %}

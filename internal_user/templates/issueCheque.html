@@ -1,0 +1,33 @@
+{% extends "tier1_homepage.html" %}
+{% load crispy_forms_tags%}
+{% block javascript %}
+ <script>
+    $(function(){
+         $('#id_chequeAmount').keyup(function(e){
+            var amount = $("#id_chequeAmount")[0].value;
+            if(amount == ""){
+                $('#issue_cheque').prop("disabled", true);
+            }
+            else{
+                $('#issue_cheque').prop("disabled", false);
+            }
+        });
+    });
+  </script>
+{% endblock %}
+{% block content %}
+<div>
+    <div>
+        <h2>Issue cashier cheque</h2><br><br>
+    </div>
+    <div class="form-group">
+        <form action='./issueCheque' method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+
+            <input type="submit" id="issue_cheque" value="Issue Cheque" disabled >
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

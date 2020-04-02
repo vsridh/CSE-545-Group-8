@@ -1,0 +1,20 @@
+{% extends customer_homepage.html" %}
+{% block content %}
+<div>
+    <div>
+        <h2>Fund Transfer</h2><br><br>
+    </div>
+    <div class="form-group">
+      <form action='./fundTransfer' method="post">
+                  {% csrf_token %}
+          <label>From Account:</label>
+          <input type="number" id="fromAccount" class="form-control" name="fromAccount"><br><br>
+          <label>To Account:</label>
+          <input type="number" id="toAccount" class="form-control" name="toAccount"><br><br>
+          <label>Amount:</label>
+          <input type="number" id="transferAmount" step="0.01" class="form-control" name="transferAmount"><br><br>
+          <input type="submit" value="Submit" class="btn btn-primary float-right app-submit">
+      </form>
+    </div>
+</div>
+{% endblock content %}

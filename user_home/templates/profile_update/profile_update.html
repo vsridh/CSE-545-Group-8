@@ -1,0 +1,10 @@
+{% extends "customer_homepage.html" %}
+{% block content %}
+        <form method="POST" action='/user_home/profile_update/'>
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ p_form.as_p }}
+            <input type="submit" value="Update Account">
+        </form>
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "tier3_homepage.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Create employee account</h2><br><br>
+    </div>
+    <div class="form-group">
+    <form action='./createEmployee' method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" id="create_emp" value="Create new account">
+    </form>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "tier1_homepage.html" %}
+
+{% block content %}
+
+<div>
+    <div>
+        <h2>View customer</h2><br><br>
+    </div>
+{% include "base_customer_search.html" with action_path="./viewCustomer" button_value="Select" context_page="view_customer" %}
+
+</div>
+{% endblock content %}
