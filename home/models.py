@@ -10,8 +10,6 @@ from django.core.validators import RegexValidator
 alphanumeric = RegexValidator(r'^[a-zA-Z]*$', 'Only alphabetic characters are allowed.')
 charint = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
-
-
 class Privilege(models.Model):
     view_transaction = models.BooleanField()
     create_transaction = models.BooleanField()
@@ -76,18 +74,6 @@ class Account(models.Model):
     def __int__(self):
         return self.account_number
 
-class Transaction(models.Model):
-    from_account = models.IntegerField()
-    to_account = models.IntegerField()
-    transaction_value = models.FloatField()
-    transaction_date = models.DateTimeField()
-    transaction_type = models.CharField(max_length=20)
-    transaction_status = models.CharField(max_length=20)
-    user = models.ForeignKey(User, related_name="Transaction_User_id", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
-
 class Appointment(models.Model):
     ASSIGNED_TYPE = (
     ('TIER1','TIER1'),
@@ -96,7 +82,6 @@ class Appointment(models.Model):
     )
     appointment_date = models.DateTimeField()
     appointment_subject = models.TextField()
-    appointment_assigned_to = models.CharField(max_length=20,choices=ASSIGNED_TYPE)
     user = models.ForeignKey(User, related_name="Appointment_User", on_delete=models.CASCADE)
 
     def __str__(self):

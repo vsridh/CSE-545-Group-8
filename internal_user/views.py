@@ -5,23 +5,10 @@ from django.contrib import messages
 from .forms import FundDepositForm, IssueChequeForm, CustomerForm
 from django.conf import settings
 from internal_user.approvals import _viewRequests, _updateRequest
+from home import models
 from internal_user.utils import render_to_pdf,sign_file, verify_file
 from django.template.loader import get_template
 from django.views.generic import View
-customers = [
-    {
-        'customerName': 'James Karen',
-        'customerId': 1,
-        'accountId': 1,
-        'accountType': 'Savings'
-    },
-    {
-        'customerName': 'Jane Doe',
-        'customerId': 2,
-        'accountId': 2,
-        'accountType': 'Checking'
-    }
-]
 
 def initFundDeposit(request):
     return render(request, 'init_fund_deposit.html')
@@ -69,7 +56,7 @@ class GeneratePdf(View):
         content = "inline;filename=" + filename
         response['Content-Disposition'] = content
         return response
-
+      
 def issueCheque(request):
     if request.method == 'POST':
         form = IssueChequeForm(request.POST)

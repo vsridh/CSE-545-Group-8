@@ -1,6 +1,26 @@
-{% extends "base.html" %}
-{% block javascript %}
- <script>
+{% extends "customer_homepage.html" %} {% block javascript %}
+<script>
+    function updateTransaction(transactionId, status) {
+        var ele = event.srcElement;
+        if (status == 'approve') {
+            ele.nextElementSibling.disabled = true;
+        } else {
+            ele.previousElementSibling.disabled = true;
+        }
+        $.ajax({
+            type: 'POST',
+            url: './updateTransaction',
+            data: {
+                'transactionId': transactionId,
+                'status': status,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(data) {
+                alert('Transaction ' + status + '. Transaction ID:' + transactionId);
+            }
+        });
+
+    }
     function updateRequest(requestId, requestType, status){
     var ele = event.srcElement;
     if(status=='approve'){
@@ -31,25 +51,27 @@
     <div>
         <table class="table">
             <thead class="thead-dark">
-               <tr>
-                  <th>Requester Name</th>
-                  <th>Request Date</th>
-                  <th>Amount</th>
-                  <th>Transaction Type</th>
-                  <th>Action</th>
-              </tr>
+                <tr>
+                    <th>From Account</th>
+                    <th>To Account</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
             </thead>
 
-          {% for transaction in pendingTransList %}
+            {% for transaction in pending %}
             <tr>
-                    <td>{{transaction.requesterName}}</td>
-                    <td>{{transaction.requestDate}}</td>
-                    <td>${{transaction.amount}}</td>
-                    <td>{{transaction.transactionType}}</td>
-                    <td>
-                        <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateRequest('{{transaction.transactionId}}', "transaction", 'approve')">
-                        <input type="submit" value="Reject" onclick="this.disabled=true;updateRequest('{'{transaction.transactionId}}', "transaction", 'reject')">
-                    </td>
+                <td>{{transaction.from_account}}</td>
+                <td>{{transaction.to_account}}</td>
+                <td>${{transaction.transaction_value}}</td>
+                <td>{{transaction.transaction_date}}</td>
+                <td>{{transaction.transaction_type}}</td>
+                <td>
+                    <input type="submit" value="Approve" onclick="this.disabled=true;this.closest('input').disabled=true;updateTransaction({{transaction.transaction_id}}, 'approve')">
+                    <input type="submit" value="Reject" onclick="this.disabled=true;updateTransaction({{transaction.transaction_id}}, 'reject')">
+                </td>
             </tr>
             {% endfor %}
         </table>

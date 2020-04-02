@@ -11,23 +11,17 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
-from django.conf import settings
 from home import models
 import logging
 log = logging.getLogger(__name__)
+from transactions import views as v
 
 # Create your views here.
 def user_home(request):      
     profile_instance = models.Profile.objects.get(user=request.user)
-    if request.user.is_authenticated and request.user.is_active and profile_instance.flag == 1:
-        if profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_CUSTOMER:
-            return render(request, 'customer_homepage.html', {'username':request.user.username})
-        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_1:
-            return render(request, 'tier1_homepage.html', {'username':request.user.username})
-        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_2:
-            return render(request, 'tier2_homepage.html', {'username': request.user.username})
-        elif profile_instance.privilege_id.user_type == settings.SB_USER_TYPE_TIER_3:
-            return render(request, 'tier3_homepage.html', {'username': request.user.username})
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
+		# return HttpResponse('Session established')
+        return render(request, 'user_homepage.html', {'username':request.user.username})
     else:
         return HttpResponse('Try again!')
 
@@ -87,9 +81,11 @@ def deleteAccount(request):
             else:
                 return HttpResponse("invalid form")
         else:
-            acc_form = AccountDeleteForm()
-        context={'acc_form' : acc_form}
-        return render(request,'delete_account/delete_account.html',context)
+            accounts_list = models.Account.objects.filter(user=request.user)
+            accounts = []
+            for account in accounts_list:
+                accounts.append({"number": account.account_number, "type": account.account_type})
+            return render(request, 'delete_account/delete_account.html', {"accounts": accounts})
     else:
         return HttpResponse("Login Failed!! Wrong username or password")
 
@@ -111,3 +107,19 @@ def updateProfile(request):
         return render(request,'profile_update/profile_update.html',context)
     else:
             return HttpResponse("Login Failed!! Wrong username or password")
+
+
+def default_fund_deposit(request):
+    profile_instance = models.Profile.objects.get(user=request.user)
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
+        return v.fund_deposit(request)
+
+def default_fund_withdraw(request):
+    profile_instance = models.Profile.objects.get(user=request.user)
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
+        return v.fund_withdraw(request)
+
+def default_get_statements(request):
+    profile_instance = models.Profile.objects.get(user=request.user)
+    if request.user.is_authenticated and request.user.is_active and profile_instance.privilege_id.user_type=="Customer" and profile_instance.flag==1:
+        return v.generateStatements(request)

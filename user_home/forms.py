@@ -6,7 +6,7 @@ from home import models
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = models.Appointment
-        fields=('appointment_date','appointment_subject','appointment_assigned_to',)
+        fields=('appointment_date','appointment_subject',)
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
@@ -20,6 +20,4 @@ class AccountForm(forms.ModelForm):
 
 class AccountDeleteForm(forms.Form):
     account_number=forms.IntegerField()
-    class Meta:
-        fields=('account_number',)
         

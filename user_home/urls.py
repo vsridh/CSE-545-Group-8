@@ -28,4 +28,7 @@ urlpatterns = [
     path('profile_update/',views.updateProfile, name='profile'),
     path('new_account/',views.newAccount, name='new_account'),
     path('delete_account/',views.deleteAccount, name='delete_account'),
+    path('deposit/',views.default_fund_deposit, name='deposit'),
+    path('withdraw/',views.default_fund_withdraw, name='withdraw'),
+    path('getStatement/',views.default_get_statements, name='getStatement')
 ]

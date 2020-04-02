@@ -37,51 +37,7 @@
         <div class="col-md-4">
           <div class="content-section">
               <ul class="list-group">
-<<<<<<< HEAD
-
-<!--                  Tier-1 menu-->
-                  <li class="list-group-item list-group-item-light menu" id="fundTransfer">
-                      <a href="http://{{ request.get_host }}/internal_user/initFundDeposit">Initiate fund deposit</a> </li>
-                  <li class="list-group-item list-group-item-light menu" id="issueCheque">
-                      <a href="http://{{ request.get_host }}/internal_user/initIssueCheque">Issue cashier cheque</a> </li>
-                  <li class="list-group-item list-group-item-light menu" id="transferFund">
-                      <a href="http://{{ request.get_host }}/transaction/initfundTransfer">Transfer money</a> </li>
-
-                  <!--    Tier-1 and Tier-2 common menu-->
-                  <li class="list-group-item list-group-item-light menu" id="viewCustomerAccount">
-                      <a href="http://{{ request.get_host }}/internal_user/initViewCustomer">View customer account</a> </li>
-                  <li class="list-group-item list-group-item-light menu" id="pendingTransactions">
-                      <a href="http://{{ request.get_host }}/transaction/pendingTransactions">Pending Transactions</a> </li>
-
-<!--                  Tier-2 menu-->
-                  <li class="list-group-item list-group-item-light menu" id="createCust">
-                      <a href="http://{{ request.get_host }}/internal_user/createCustomer">Create customer account</a> </li>
-                   <li class="list-group-item list-group-item-light menu" id="modifyCust">
-                      <a href="http://{{ request.get_host }}/internal_user/initModifyCustomer">Modify customer account</a> </li>
-                   <li class="list-group-item list-group-item-light menu" id="deleteCust">
-                      <a href="http://{{ request.get_host }}/internal_user/deleteCustomer">Close customer account</a> </li>
-
-<!--                  Admin menu-->
-                  <li class="list-group-item list-group-item-light menu" id="createEmp">
-                      <a href="http://{{ request.get_host }}/admin_app/createEmployee">Create employee account</a> </li>
-                   <li class="list-group-item list-group-item-light menu" id="modifyEmp">
-                      <a href="http://{{ request.get_host }}/admin_app/modifyEmployee">Modify employee account</a> </li>
-                   <li class="list-group-item list-group-item-light menu" id="deleteEmp">
-                      <a href="http://{{ request.get_host }}/admin_app/deleteEmployee">Delete employee account</a> </li>
-<!--                  Customer menu-->
-                    <li class="list-group-item list-group-item-light menu" id="MakeAppointment">
-                        <a href="/user_home/appointment/">Make Appointment</a> </li>
-                    <li class="list-group-item list-group-item-light menu" id="UpdateProfile">
-                        <a href="/user_home/profile_update/">Update Profile</a> </li>
-                    <li class="list-group-item list-group-item-light menu" id="AddNewAccount">
-                        <a href="/user_home/new_account/">Add New Account</a> </li>
-                    <li class="list-group-item list-group-item-light menu" id="DeleteAccount">
-                        <a href="/user_home/delete_account/">Delete Account</a> </li>
-                      
-
-=======
                     {% block menu %}{% endblock %}
->>>>>>> c75c19e469c745f36aa6de714e27eb9bb6351fcb
                </ul>
           </div>
         </div>
