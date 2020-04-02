@@ -27,5 +27,6 @@ urlpatterns = [
     path('pendingTransactions', views.pendingTrans, name='pending-transactions'),
     path('updateTransaction', views.updateTransaction, name='update-transaction'),
     path('deposit', views.fund_deposit, name='fund-deposit'),
-    path('withdraw', views.fund_withdraw, name='fund-withdraw')
+    path('withdraw', views.fund_withdraw, name='fund-withdraw'),
+    path('getStatement', views.generateStatements, name='get-statement')
 ]

@@ -199,45 +199,52 @@ def updateTransaction(request):
     return HttpResponse({'value':'success'}, status=200)
 
 def generateStatements(request):
-    user = request.user
-    account_object = Account.objects.get(user=user)
-    if account_object is not None:
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        row_height = pdf.font_size
-        spacing = 4
-        pdf.write(row_height, 'Account Number: {}\n'.format(account_object.account_number))
-        pdf.write(row_height, 'Account Type: {}\n'.format(account_object.account_type))
-        pdf.write(row_height, 'Account Balance: {}\n\n'.format(account_object.account_balance))
-        col_width = pdf.w / 4.5
-        records = [['Recipient', 'Amount', 'Date', 'Time']]
-        url = 'http://localhost:8080/api/query'
-        payload = '{"from": "' + str(account_object.account_number) + '"}'
-        headers = {'content-type': 'application/json',}
-        r = requests.get(url, data=payload, headers=headers)
-        json_data = json.loads(r.json()['response'])
-        row_data = []
-        for row in json_data:
-            row_data.append(row['Record']['from'])
-            row_data.append(row['Record']['amount'])
-            row_data.append(row['Record']['date'])
-            row_data.append(row['Record']['time'])
-            records.append(row_data)
-        for row in records:
-            for item in row:
-                pdf.cell(col_width, row_height*spacing,
-                        txt=item, border=1)
-            pdf.ln(row_height*spacing)
-        filename = '{}-{}.pdf'.format(account_object.account_number, datetime.now())
-        pdf.output('./transactions/statements/' + filename)
-        # fill these variables with real values
-        with open('./transactions/statements/' + filename, 'rb') as pdf:
-            response = HttpResponse(pdf, content_type='application/pdf')
-            response['Content-Disposition'] = "attachment; filename=%s" % filename
-            return response
-    else:
-        return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
+    if request.method == 'POST':
+        account_number = request.POST['accountId']
+        account_object = Account.objects.get(account_number=account_number)
+        if account_object is not None:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            row_height = pdf.font_size
+            spacing = 4
+            pdf.write(row_height, 'Account Number: {}\n'.format(account_object.account_number))
+            pdf.write(row_height, 'Account Type: {}\n'.format(account_object.account_type))
+            pdf.write(row_height, 'Account Balance: {}\n\n'.format(account_object.account_balance))
+            col_width = pdf.w / 4.5
+            records = [['Recipient', 'Amount', 'Date', 'Time']]
+            url = 'http://localhost:8080/api/query'
+            payload = '{"from": "' + str(account_object.account_number) + '"}'
+            headers = {'content-type': 'application/json',}
+            r = requests.get(url, data=payload, headers=headers)
+            json_data = json.loads(r.json()['response'])
+            row_data = []
+            for row in json_data:
+                row_data.append(row['Record']['from'])
+                row_data.append(row['Record']['amount'])
+                row_data.append(row['Record']['date'])
+                row_data.append(row['Record']['time'])
+                records.append(row_data)
+            for row in records:
+                for item in row:
+                    pdf.cell(col_width, row_height*spacing,
+                            txt=item, border=1)
+                pdf.ln(row_height*spacing)
+            filename = '{}-{}.pdf'.format(account_object.account_number, datetime.now())
+            pdf.output('./transactions/statements/' + filename)
+            # fill these variables with real values
+            with open('./transactions/statements/' + filename, 'rb') as pdf:
+                response = HttpResponse(pdf, content_type='application/pdf')
+                response['Content-Disposition'] = "attachment; filename=%s" % filename
+                return response
+        else:
+            return render(request, 'failed.html', {'failure': '500 Error: Account not found.'}, status=500)
+    elif request.method == 'GET':
+        accounts_list = Account.objects.filter(user=request.user)
+        accounts = []
+        for account in accounts_list:
+            accounts.append({"number": account.account_number, "type": account.account_type})
+        return render(request, 'statements.html', {"accounts": accounts})
 
 #generate key function
 #generate private key and public key
