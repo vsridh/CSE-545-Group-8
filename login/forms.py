@@ -5,7 +5,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(max_length=15, widget=forms.PasswordInput)
 
 class Otp(forms.Form):
-    otp = forms.IntegerField()
+    otp = forms.IntegerField(widget=forms.TextInput(attrs={'id': 'otpInput', 'type': 'tel', 'autofocus': 'true'}))
     class Meta:
         fields=('otp',)
 
