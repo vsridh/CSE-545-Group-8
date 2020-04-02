@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
+     'django_twilio',
     'admin_app.apps.AdminAppConfig',
     'create_account.apps.CreateAccountConfig',
     'user_home.apps.UserHomeConfig',
@@ -177,12 +177,17 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 BASE_URL = 'http://localhost:8000'
 
+#to send email
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'securebank100@gmail.com'
 EMAIL_HOST_PASSWORD = 'secure_bank@100'
 EMAIL_PORT = 587
 
+# to send msgs
+TWILIO_ACCOUNT_SID = 'ACc3f1f6c75f2f68352dbec156616a5461'
+TWILIO_AUTH_TOKEN = '6d41d562bdc83dd9209746be0543f832'
+TWILIO_PHONE_NUMBER= '+12029522047'
 
 SB_USER_TYPE_TIER_1 = "Tier_1"
 SB_USER_TYPE_CUSTOMER = "Customer"

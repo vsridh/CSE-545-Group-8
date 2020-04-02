@@ -12,4 +12,11 @@ class Otp(forms.Form):
 class Token(forms.Form):
     token = forms.IntegerField(widget=forms.HiddenInput())
     
+class Forgot_password(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    new_password=forms.CharField(max_length=15, widget=forms.PasswordInput)
+    confirm_new_password=forms.CharField(max_length=15, widget=forms.PasswordInput)
+    class Meta:
+        fields=('username','email','new_password','confirm_new_password',)
 
